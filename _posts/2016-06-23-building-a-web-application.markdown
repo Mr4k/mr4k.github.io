@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tangled Up in the Web"
-date:   2016-06-20 11:17:30 -0800
+date:   2016-06-23 11:17:30 -0800
 categories: chess project javascript python
 ---
 
