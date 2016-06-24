@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Trapped in the Web"
+title:  "Snared by the Web"
 date:   2016-06-23 11:17:30 -0800
 categories: chess project javascript python
 ---
