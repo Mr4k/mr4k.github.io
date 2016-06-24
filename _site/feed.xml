@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Peter Stefek</title>
+    <description>I&#39;m a third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
+</description>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 21 Jun 2016 16:01:38 -0700</pubDate>
+    <lastBuildDate>Tue, 21 Jun 2016 16:01:38 -0700</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Chess 2</title>
+        <description>&lt;p&gt;var board, game = new Chess();&lt;/p&gt;
+
+&lt;p&gt;var makeRandomMove = function() {
+  var possibleMoves = game.moves();&lt;/p&gt;
+
+&lt;p&gt;// exit if the game is over
+  if (game.game_over() === true ||
+    game.in_draw() === true ||
+    possibleMoves.length === 0) return;&lt;/p&gt;
+
+&lt;p&gt;var randomIndex = Math.floor(Math.random() * possibleMoves.length);
+  game.move(possibleMoves[randomIndex]);
+  board.position(game.fen());&lt;/p&gt;
+
+&lt;p&gt;window.setTimeout(makeRandomMove, 500);
+};&lt;/p&gt;
+
+&lt;p&gt;board = ChessBoard(‘board’, ‘start’);
+$(“#board”).append(“&amp;lt;div class=&#39;loader&#39;&amp;gt;Loading…&amp;lt;/div&amp;gt;”)&lt;/p&gt;
+
+&lt;p&gt;window.setTimeout(makeRandomMove, 500);&lt;/p&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;json3.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;jquery-3.0.0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/chessboard-0.3.0.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/chessboard-0.3.0.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/loader.css&quot; /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;board&quot; style=&quot;width: 25%&quot;&gt;&lt;/div&gt;
+    &lt;script src=&quot;play.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</description>
+        <pubDate>Tue, 21 Jun 2016 11:23:40 -0700</pubDate>
+        <link>http://yourdomain.com/chess/project/2016/06/21/test.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chess/project/2016/06/21/test.html</guid>
+        
+        
+        <category>chess</category>
+        
+        <category>project</category>
+        
+      </item>
+    
+      <item>
+        <title>Chess</title>
+        <description>&lt;p&gt;&lt;img align=&quot;up&quot; src=&quot;/chess.gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At some point last semester I was challenged by one of my friends to write a program which could beat him in chess over the summer. This may have come after a series of loses to said friend. Now that summer is here I figure that I might as well try to do it. The caveat is that I am terrible at chess. This means that I cannot write a decent position evaulation function by hand. However I am armed with an &lt;a href=&quot;http://www.ficsgames.org/download.html&quot;&gt;archive&lt;/a&gt; of thousands of chess games and a simple understanding of machine learning techniques. I will try to post regular progress if it occurs.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 20 Jun 2016 11:23:40 -0700</pubDate>
+        <link>http://yourdomain.com/chess/project/2016/06/20/chess.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chess/project/2016/06/20/chess.html</guid>
+        
+        
+        <category>chess</category>
+        
+        <category>project</category>
+        
+      </item>
+    
+  </channel>
+</rss>
