@@ -9,7 +9,7 @@ categories: chess project minimax algorithm search monte carlo
 	<img src="/tree_comic.png"> 
 </p>
 
-So over the weekend I built the server and client side of the chess playing system. I ended up using flask for the backend because I like python. I am in the middle of deploying what I have so far to the web via Openshift. Meanwhile you can view the source code on [github](https://github.com/Mr4k/playchess) but be warned, I have not cleaned it up yet. Although I have a working application I'm far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.
+So over the weekend I built the server and client side of the chess playing system. I ended up using [Flask](http://flask.pocoo.org/) for the backend because I like python. I am in the middle of deploying what I have so far to the web via Openshift. Meanwhile you can view the source code on [github](https://github.com/Mr4k/playchess) but be warned, I have not cleaned it up yet. Although I have a working application I'm far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.
 
 **The Current Algorithm**
 The current algorithm I am using is pretty simple. There are two main components, search and evaluation.  
@@ -50,7 +50,7 @@ The draw back to minimax in any form is that it is slow. By that I mean it takes
 *Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.  
 
 **Improving the evaluation function**
-This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it's usually not. I'm hoping that a thousands of previous chess games say describe it better than I can.
+This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it's usually not. I'm hoping that thousands of previous chess games say describe it better than I can.
 
 
 
