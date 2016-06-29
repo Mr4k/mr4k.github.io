@@ -66,7 +66,7 @@
 	<img src="/tree_comic.png" /> 
 </p>
 
-<p>So over the weekend I built the server and client side of the chess playing system. I ended up using flask for the backend because I like python. I am in the middle of deploying what I have so far to the web via Openshift. Meanwhile you can view the source code on <a href="https://github.com/Mr4k/playchess">github</a> but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.</p>
+<p>So over the weekend I built the server and client side of the chess playing system. I ended up using <a href="http://flask.pocoo.org/">Flask</a> for the backend because I like python. I am in the middle of deploying what I have so far to the web via Openshift. Meanwhile you can view the source code on <a href="https://github.com/Mr4k/playchess">github</a> but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.</p>
 
 <p><strong>The Current Algorithm</strong>
 The current algorithm I am using is pretty simple. There are two main components, search and evaluation.</p>
@@ -102,12 +102,10 @@ Right now I am using a search algorithm called minimax along with a technique ca
 While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.</p>
 
 <p><strong>Improving Search</strong>
-The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning.This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search.<br />
-*Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring.
-*Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.</p>
+The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.</p>
 
 <p><strong>Improving the evaluation function</strong>
-This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that a thousands of previous chess games say describe it better than I can.</p>
+This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games say describe it better than I can.</p>
 
 
   </div>

@@ -45,9 +45,7 @@ It's defintely not great and I am sure someone who was good at chess could write
 While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.  
 
 **Improving Search**
-The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can't look super far ahead to set up any mind blowing traps. There are several options I have to improve the search.  
-* Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring.
-* Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.  
+The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can't look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.  
 
 **Improving the evaluation function**
 This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it's usually not. I'm hoping that thousands of previous chess games say describe it better than I can.
