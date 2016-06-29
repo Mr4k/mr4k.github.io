@@ -6,62 +6,118 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Jun 2016 16:01:38 -0700</pubDate>
-    <lastBuildDate>Tue, 21 Jun 2016 16:01:38 -0700</lastBuildDate>
+    <pubDate>Tue, 28 Jun 2016 23:18:35 -0700</pubDate>
+    <lastBuildDate>Tue, 28 Jun 2016 23:18:35 -0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>Chess 2</title>
-        <description>&lt;p&gt;var board, game = new Chess();&lt;/p&gt;
+        <title>The Count of Monte Carlo</title>
+        <description>&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/tree_comic.png&quot; /&gt; 
+&lt;/p&gt;
 
-&lt;p&gt;var makeRandomMove = function() {
-  var possibleMoves = game.moves();&lt;/p&gt;
+&lt;p&gt;So over the weekend I built the server and client side of the chess playing system. I ended up using flask for the backend because I like python. I am in the middle of deploying what I have so far to the web via Openshift. Meanwhile you can view the source code on &lt;a href=&quot;https://github.com/Mr4k/playchess&quot;&gt;github&lt;/a&gt; but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.&lt;/p&gt;
 
-&lt;p&gt;// exit if the game is over
-  if (game.game_over() === true ||
-    game.in_draw() === true ||
-    possibleMoves.length === 0) return;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Current Algorithm&lt;/strong&gt;
+The current algorithm I am using is pretty simple. There are two main components, search and evaluation.&lt;/p&gt;
 
-&lt;p&gt;var randomIndex = Math.floor(Math.random() * possibleMoves.length);
-  game.move(possibleMoves[randomIndex]);
-  board.position(game.fen());&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Search Algorithm&lt;/strong&gt;
+Right now I am using a search algorithm called minimax along with a technique called alpha beta pruning. The basic principle behind 2 player minimax is that the best move is the one which minimizes your opponent’s potential gain. Before we look at how this applies to chess let’s look at a very simple example.&lt;/p&gt;
 
-&lt;p&gt;window.setTimeout(makeRandomMove, 500);
-};&lt;/p&gt;
+&lt;p&gt;In traditional math style, Alice and Bob are bored at home and decided to play chess. Because Alice is a chess prodigy, she destroys Bob five to nothing. To make him feel better, Alice challenges him to a new game called Trenchwaffle which heavily favors Bob. In Trenchwaffle each player can either dig a trench (branch right) or eat a waffle (branch left). There are only three turns in the whole game (Bob moves, then Alice moves, then Bob moves a once more). Although the rules of Trenchwaffle are vague and mysterious we manage to procure a complete &lt;a href=&quot;https://en.wikipedia.org/wiki/Game_tree&quot;&gt;game tree&lt;/a&gt;. So the question is should Bob eat a waffle (branch left) or dig a trench (branch right)? The following diagram shows how to use the minimax algorithm to figure out which move Bob should make:&lt;/p&gt;
 
-&lt;p&gt;board = ChessBoard(‘board’, ‘start’);
-$(“#board”).append(“&amp;lt;div class=&#39;loader&#39;&amp;gt;Loading…&amp;lt;/div&amp;gt;”)&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/trenchwaffle.png&quot; /&gt; 
+&lt;/p&gt;
 
-&lt;p&gt;window.setTimeout(makeRandomMove, 500);&lt;/p&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;json3.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;jquery-3.0.0.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;js/chessboard-0.3.0.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/chessboard-0.3.0.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/loader.css&quot; /&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div id=&quot;board&quot; style=&quot;width: 25%&quot;&gt;&lt;/div&gt;
-    &lt;script src=&quot;play.js&quot;&gt;&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+&lt;p&gt;According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. The great thing about using minimax in this game is that gives us the perfect move. Because Trenchwaffle is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Solved_game&quot;&gt;solvable&lt;/a&gt; minimax wills choose the best move possible. So why does this not work with chess, isn’t &lt;a href=&quot;https://en.wikipedia.org/wiki/Solving_chess&quot;&gt;chess solvable&lt;/a&gt;? The answer is that the game tree for chess is far too big to compute in full. The average &lt;a href=&quot;https://en.wikipedia.org/wiki/Branching_factor&quot;&gt;branching factor&lt;/a&gt; for chess is around 36. So the sixth layer of the game tree contains around 36&lt;sup&gt;5&lt;/sup&gt; moves. The tenth layer contains around 36&lt;sup&gt;10&lt;/sup&gt; moves.&lt;/p&gt;
+
+&lt;p&gt;To apply minimax to a game like chess there are too many moves to look at we only look a small number of moves ahead and then guess how good each leaf node of our game tree is. In my current implementation I look 5 half moves ahead and even then I still need to reduce the number of nodes searched using &lt;a href=&quot;https://www.youtube.com/watch?v=Ewh-rF7KSEg&quot;&gt;alpha beta pruning&lt;/a&gt;. So now we just need a way to determine how good a position is for a particular player. This is called the evaluation function.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Evaluation Function&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The evaluation function takes a game state as a parameter and returns a number which represents how good that state is for one of the two players. My evaluation function takes a chess board and returns how good it thinks black is doing (larger is better).&lt;/p&gt;
+
+&lt;p&gt;The current evalution function I am using looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function evaluate(board)
+  return (total value of pieces black captured) - (total value of pieces white captured)
+   + 0.1 * (total value of pieces black is attacking) + 0.1 * (total value of pieces black is defending)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It’s defintely not great and I am sure someone who was good at chess could write me a better one. However I have some other ideas to improve the evaluation function.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Future&lt;/strong&gt;
+While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Improving Search&lt;/strong&gt;
+The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning.This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search.&lt;br /&gt;
+*Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring.
+*Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Improving the evaluation function&lt;/strong&gt;
+This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that a thousands of previous chess games say describe it better than I can.&lt;/p&gt;
+
 </description>
-        <pubDate>Tue, 21 Jun 2016 11:23:40 -0700</pubDate>
-        <link>http://yourdomain.com/chess/project/2016/06/21/test.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/chess/project/2016/06/21/test.html</guid>
+        <pubDate>Tue, 28 Jun 2016 13:30:40 -0700</pubDate>
+        <link>http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</guid>
         
         
         <category>chess</category>
         
         <category>project</category>
         
+        <category>minimax</category>
+        
+        <category>algorithm</category>
+        
+        <category>search</category>
+        
+        <category>monte</category>
+        
+        <category>carlo</category>
+        
+      </item>
+    
+      <item>
+        <title>Tangled Up in the Web</title>
+        <description>&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/webdev.png&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;While I am trying to figure out how to actually build a chess algorithm I am working on other parts of the project. While googling the word chess (always a good way to start) I found several nice javascript frameworks conviently called &lt;a href=&quot;http://chessboardjs.com/&quot;&gt;chessboard.js&lt;/a&gt; and &lt;a href=&quot;https://github.com/jhlywa/chess.js&quot;&gt;chess.js&lt;/a&gt;. So feature creep kicked in and I decided to build a web interface to my chess engine. There are a couple nice things about this including the fact that I can easily send a link to my friend in South Africa when it’s done. It will also look pretty which is nice. Currently the application I am envisioning looks something like this:&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/overview.png&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why am I not doing it all client side?&lt;/strong&gt;
+I can make excuses. Machine learning can be slow and complicated to run in a browser. Tensorflow doesn’t have an offical javascript port. I need easy access to the gpu. But honestly it mostly comes down to the fact that I really want to try to build a (simple) full stack web application. I have not had much experience with web development and I want get some more experience.  &lt;br /&gt;
+&lt;strong&gt;Hows it been going?&lt;/strong&gt;
+Well today I started by asking some basic questions. Where do I host my application. How do I communicate between the server and the client? What open source javascript projects are out there? And then some more specific questions. What’s a RESTful api? Should I make my server in python or node? Finally some angry questions. What do you mean I can’t send an unencrypted ajax request from a page hosted over https to the server on my laptop? What the hell is https? So overall it went well. Hopefully I’ll finish something that works over the weekend.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 23 Jun 2016 12:17:30 -0700</pubDate>
+        <link>http://yourdomain.com/chess/project/javascript/python/2016/06/23/building-a-web-application.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chess/project/javascript/python/2016/06/23/building-a-web-application.html</guid>
+        
+        
+        <category>chess</category>
+        
+        <category>project</category>
+        
+        <category>javascript</category>
+        
+        <category>python</category>
+        
       </item>
     
       <item>
         <title>Chess</title>
-        <description>&lt;p&gt;&lt;img align=&quot;up&quot; src=&quot;/chess.gif&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p align=&quot;center&quot;&gt;
+	&lt;img align=&quot;up&quot; src=&quot;/chess.gif&quot; /&gt; 
+&lt;/p&gt;
 
 &lt;p&gt;At some point last semester I was challenged by one of my friends to write a program which could beat him in chess over the summer. This may have come after a series of loses to said friend. Now that summer is here I figure that I might as well try to do it. The caveat is that I am terrible at chess. This means that I cannot write a decent position evaulation function by hand. However I am armed with an &lt;a href=&quot;http://www.ficsgames.org/download.html&quot;&gt;archive&lt;/a&gt; of thousands of chess games and a simple understanding of machine learning techniques. I will try to post regular progress if it occurs.&lt;/p&gt;
 </description>

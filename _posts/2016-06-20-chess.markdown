@@ -4,7 +4,8 @@ title:  "Chess"
 date:   2016-06-20 10:23:40 -0800
 categories: chess project 
 ---
-
-<img align="up" src="/chess.gif"> 
+<p align="center">
+	<img align="up" src="/chess.gif"> 
+</p>
 
 At some point last semester I was challenged by one of my friends to write a program which could beat him in chess over the summer. This may have come after a series of loses to said friend. Now that summer is here I figure that I might as well try to do it. The caveat is that I am terrible at chess. This means that I cannot write a decent position evaulation function by hand. However I am armed with an [archive](http://www.ficsgames.org/download.html) of thousands of chess games and a simple understanding of machine learning techniques. I will try to post regular progress if it occurs.
