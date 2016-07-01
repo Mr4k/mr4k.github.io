@@ -6,6 +6,15 @@
     border-bottom: 1px solid $grey-color-light;
     min-height: 56px;
 
+    a {
+        color: $text-color;
+        text-decoration: none;
+
+        &:hover{
+            color: blue;
+        }
+    }
+
     // Positioning context for the mobile navigation icon
     position: relative;
 }
@@ -182,6 +191,16 @@
     > li {
         margin-bottom: $spacing-unit;
     }
+
+    a {
+        color: $text-color;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:hover {
+            color: blue;
+        }
+    }
 }
 
 .post-meta {
@@ -194,7 +213,13 @@
     font-size: 24px;
 }
 
+/**
+* Center
+*/
 
+.center-text{
+    text-align: center;
+}
 
 /**
  * Posts

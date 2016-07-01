@@ -13,7 +13,7 @@ dl, dd, ol, ul, figure {
 body {
   font: 400 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #111;
-  background-color: #fdfdfd;
+  background-color: #fcfdfd;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
@@ -66,13 +66,10 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #2a7ae2;
-  text-decoration: none; }
-  a:visited {
-    color: #1756a9; }
+  color: #111;
+  text-decoration: underline; }
   a:hover {
-    color: #111;
-    text-decoration: underline; }
+    color: blue; }
 
 /**
  * Blockquotes
@@ -152,6 +149,11 @@ pre {
   border-bottom: 1px solid #e8e8e8;
   min-height: 56px;
   position: relative; }
+  .site-header a {
+    color: #111;
+    text-decoration: none; }
+    .site-header a:hover {
+      color: blue; }
 
 .site-title {
   font-size: 26px;
@@ -178,7 +180,7 @@ pre {
       position: absolute;
       top: 9px;
       right: 15px;
-      background-color: #fdfdfd;
+      background-color: #fcfdfd;
       border: 1px solid #e8e8e8;
       border-radius: 5px;
       text-align: right; }
@@ -274,6 +276,12 @@ pre {
   list-style: none; }
   .post-list > li {
     margin-bottom: 30px; }
+  .post-list a {
+    color: #111;
+    text-decoration: none;
+    font-weight: bold; }
+    .post-list a:hover {
+      color: blue; }
 
 .post-meta {
   font-size: 12.25px;
@@ -282,6 +290,12 @@ pre {
 .post-link {
   display: block;
   font-size: 24px; }
+
+/**
+* Center
+*/
+.center-text {
+  text-align: center; }
 
 /**
  * Posts
