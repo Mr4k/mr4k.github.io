@@ -95,4 +95,4 @@ if __name__ == "__main__":
 {% endhighlight %}
   
 **Improvements**  
-This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like [word2vec](https://en.wikipedia.org/wiki/Word2vec) to understand the meanings of words better, using a more complex classifier than an svm.
+This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like [word2vec](https://en.wikipedia.org/wiki/Word2vec) to understand the meanings of words better, using a more complex classifier than a svm.
