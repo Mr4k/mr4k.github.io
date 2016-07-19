@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Getting Sentimental</title>
+  <meta name="description" content="	 ">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html">
+  <link rel="alternate" type="application/rss+xml" title="Peter Stefek" href="http://yourdomain.com/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Peter Stefek</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Getting Sentimental</h1>
+    <p class="post-meta"><time datetime="2016-07-14T02:40:40-07:00" itemprop="datePublished">Jul 14, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p align="center">
+	<img src="/t-wex.png" /> 
+</p>
+
+<p>I just got back from a week long backpacking trip. I decided that I was going to take a break from my chess engine to do a couple quick experiments in other areas of machine learning. Yesterday I wrote a simple sentiment analyzer in 50 lines of python. In this post I will explain what I did and how it could be improved.</p>
+
+<p><strong>The Data</strong><br />
+I got my data from the <a href="http://help.sentiment140.com/for-students/">Sentiment 140</a> database. It contains 1.6 million tweets labeled as either positive negative or neutral. I only used the positive and negative tweets from the database because I was using a binary classifier for simplicity. As a side note databases like Sentiment 140 can be quite biased towards the opinions of certain groups of people. I found <a href="https://www.oreilly.com/learning/how-we-amplify-privilege-with-supervised-machine-learning">this talk</a> to be very interesting and intutive explantion of the biases in supervised machine learning.</p>
+
+<p><strong>The Algorithm</strong><br />
+The algorithm I used is pretty basic as natural language processing goes. It has two main steps, preproccesing the text and classification.</p>
+
+<p><strong>Preprocessing</strong><br />
+First I convert the tweets into vectors using a bigram model. This means that each unique word and pair of words becomes its own feature.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c">#This tweet</span>
+<span class="n">tweet</span> <span class="o">=</span> <span class="s">'I am a drama llama'</span>
+<span class="c">#Produces these features</span>
+<span class="p">[</span><span class="s">'I'</span><span class="p">,</span><span class="s">'am'</span><span class="p">,</span><span class="s">'a'</span><span class="p">,</span><span class="s">'drama'</span><span class="p">,</span><span class="s">'llama'</span><span class="p">,</span><span class="s">'I am'</span><span class="p">,</span> <span class="s">'am a'</span><span class="p">,</span> <span class="s">'a drama'</span><span class="p">,</span> <span class="s">'drama llama'</span><span class="p">]</span></code></pre></figure>
+
+<p>Our feature space is contructed by feeding all of our training data into this model. To convert a tweet to a vector all we do is make a vector which counts how many times each feature occurs in the tweet multiplied by two scalar terms called the term frequency and the inverse document frequency (idf).<br />
+The term frequency of a feature is simply the frequency of the feature in the current document(tweet). The rational behind the tf is that words that occur more might matter more. The inverse document frequency is defined as follows,</p>
+<p align="center">
+	<img src="/idf.png" /> 
+</p>
+<p>where N is the total number of documents and <em>df</em> is the number of documents containing our feature. As far as I can tell the <em>log</em> is only there to keep the size of the idf from exploding. The rational behind this term is that features that occur in multiple documents are more likely to provide important clues about the document so they should be weighed higher. “But wait,”, you ask, “what about word like ‘the’, they occur everywhere but are essentially meaningless.” Well the answer is that we ignore the words that occur in too many documents and too few documents. In this way wors like ‘the’ will be ignored because they are too frequent.</p>
+
+<p><strong>Classification</strong>
+Now that we have high dimensional representions for the tweets as vectors we just need a way to map those vectors to a sentiment (good or bad in this case). I’ve chosen to a support vector machine to classify the tweets. A support vector machine just finds the hyperplane which best divides the two labeled sets of tweet vectors (good and bad). Then we classify new tweets as good or bad based on which side of the plane they are on.</p>
+
+<p><strong>Code</strong></p>
+
+<p>Below is the full source code. Feel free to run it yourself. You’ll need the sentiment140 data to do so as well as numpy, sci-py and, scikit-learn.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">training_in</span><span class="p">,</span> <span class="n">training_target</span><span class="p">):</span>
+	<span class="c">#the parameters min_df and max_df where choosen experimentally</span>
+	<span class="c">#the hinge parameter specfices that we are using an svm</span>
+	<span class="n">text_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s">'tfidf'</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s">'ISO-8859-1'</span><span class="p">,</span> <span class="n">max_df</span> <span class="o">=</span> <span class="mf">0.002</span><span class="p">,</span> 
+		<span class="n">min_df</span> <span class="o">=</span> <span class="mf">0.00015</span><span class="p">)),</span>
+		<span class="p">(</span><span class="s">'clf'</span><span class="p">,</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s">'hinge'</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s">'l2'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000</span><span class="p">))),</span>
+	<span class="p">])</span>
+
+	<span class="n">text_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">training_in</span><span class="p">,</span> <span class="n">training_target</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">text_clf</span>
+
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+	<span class="n">training_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/training.1600000.processed.noemoticon.csv"</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">"class"</span><span class="p">,</span><span class="s">"id"</span><span class="p">,</span><span class="s">"time"</span><span class="p">,</span><span class="s">"query"</span><span class="p">,</span><span class="s">"user"</span><span class="p">,</span><span class="s">"text"</span><span class="p">])</span>
+	<span class="n">testing_data</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/testdata.manual.2009.06.14.csv"</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">"class"</span><span class="p">,</span><span class="s">"id"</span><span class="p">,</span><span class="s">"time"</span><span class="p">,</span><span class="s">"query"</span><span class="p">,</span><span class="s">"user"</span><span class="p">,</span><span class="s">"text"</span><span class="p">])</span>
+
+	<span class="c">#In the data there are three classes of data [0:negative, 2:neutral, 4:positive] </span>
+	<span class="c">#For this example we are only going to tag things are positive or negative</span>
+	<span class="n">training_data</span> <span class="o">=</span> <span class="n">training_data</span><span class="p">[(</span><span class="n">training_data</span><span class="p">[</span><span class="s">"class"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="s">"class"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)]</span>
+	<span class="n">testing_data</span> <span class="o">=</span> <span class="n">testing_data</span><span class="p">[(</span><span class="n">testing_data</span><span class="p">[</span><span class="s">"class"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">testing_data</span><span class="p">[</span><span class="s">"class"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)]</span>
+	<span class="k">return</span> <span class="n">training_data</span><span class="p">,</span> <span class="n">testing_data</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">"Loading Data"</span><span class="p">)</span>
+	<span class="n">training_data</span><span class="p">,</span><span class="n">testing_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+
+	<span class="k">print</span><span class="p">(</span><span class="s">"Constructing Model"</span><span class="p">)</span>
+	<span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="s">"text"</span><span class="p">],</span> <span class="n">training_data</span><span class="p">[</span><span class="s">"class"</span><span class="p">])</span>
+
+	<span class="k">print</span><span class="p">(</span><span class="s">"Predicting Output"</span><span class="p">)</span>
+	<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">testing_data</span><span class="p">[</span><span class="s">"text"</span><span class="p">])</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">testing_data</span><span class="p">[</span><span class="s">"class"</span><span class="p">],</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s">"bad"</span><span class="p">,</span><span class="s">"good"</span><span class="p">]))</span>
+
+	<span class="k">print</span><span class="p">(</span><span class="s">"Enter Some Phrases to Test the Sentiment Analyzer or Type 'quit' to Exit."</span><span class="p">)</span>
+	<span class="n">phrase</span> <span class="o">=</span> <span class="s">""</span>
+	<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+		<span class="n">phrase</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">"&gt;&gt;&gt;"</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">phrase</span> <span class="o">==</span> <span class="s">"quit"</span><span class="p">:</span>
+			<span class="k">break</span>
+		<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">phrase</span><span class="p">])</span>
+		<span class="k">print</span> <span class="s">"class:"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">predicted</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+	<span class="n">main</span><span class="p">()</span></code></pre></figure>
+
+<p><strong>Improvements</strong><br />
+This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like <a href="https://en.wikipedia.org/wiki/Word2vec">word2vec</a> to understand the meanings of words better, using a more complex classifier than an svm.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Peter Stefek</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Peter Stefek</li>
+          <li><a href="mailto:pstefek@oberlin.edu">pstefek@oberlin.edu</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/mr4k"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">mr4k</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>I'm a third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
