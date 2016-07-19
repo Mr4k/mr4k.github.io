@@ -32,13 +32,12 @@ The term frequency of a feature is simply the frequency of the feature in the cu
 <p align="center">
 	<img src="/idf.png"> 
 </p>
-where N is the total number of documents and *df* is the number of documents containing our feature. As far as I can tell the *log* is only there to keep the size of the idf from exploding. The rational behind this term is that features that occur in multiple documents are more likely to provide important clues about the document so they should be weighed higher. "But wait,", you ask, "what about word like 'the', they occur everywhere but are essentially meaningless." Well the answer is that we ignore the words that occur in too many documents and too few documents. In this way wors like 'the' will be ignored because they are too frequent.
+where N is the total number of documents and *df* is the number of documents containing our feature. As far as I can tell the *log* is only there to keep the size of the idf from exploding. The rational behind this term is that features that occur in multiple documents are more likely to provide important clues about the document so they should be weighed higher. "But wait,", you ask, "what about word like 'the', they occur everywhere but are essentially meaningless." Well the answer is that we ignore the words that occur in too many documents and too few documents. In this way wors like 'the' will be ignored because they are too frequent.  
 
-**Classification**
-Now that we have high dimensional representions for the tweets as vectors we just need a way to map those vectors to a sentiment (good or bad in this case). I've chosen to a support vector machine to classify the tweets. A support vector machine just finds the hyperplane which best divides the two labeled sets of tweet vectors (good and bad). Then we classify new tweets as good or bad based on which side of the plane they are on.
+**Classification**  
+Now that we have high dimensional representions for the tweets as vectors we just need a way to map those vectors to a sentiment (good or bad in this case). I've chosen to a support vector machine to classify the tweets. A support vector machine just finds the hyperplane which best divides the two labeled sets of tweet vectors (good and bad). Then we classify new tweets as good or bad based on which side of the plane they are on.  
 
-**Code**
-
+**Code**  
 Below is the full source code. Feel free to run it yourself. You'll need the sentiment140 data to do so as well as numpy, sci-py and, scikit-learn.
 {% highlight python %}
 from sklearn.linear_model import SGDClassifier
