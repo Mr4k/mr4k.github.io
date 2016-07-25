@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Jul 2016 17:13:07 -0400</pubDate>
-    <lastBuildDate>Mon, 25 Jul 2016 17:13:07 -0400</lastBuildDate>
+    <pubDate>Mon, 25 Jul 2016 17:48:32 -0400</pubDate>
+    <lastBuildDate>Mon, 25 Jul 2016 17:48:32 -0400</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -43,7 +43,7 @@ I also used both L2 regularizarion and dropout so that I would have to worry les
 I used 200,000 games from &lt;a href=&quot;http://www.kingbase-chess.net/&quot;&gt;KingBase&lt;/a&gt;, a database of games between players ranked &amp;gt; 2000, to train the network. I took each board position and figured out the probability distributions over all the moves made from it during those games. Then I used that data to train the network for about 36 hours on my macbook (no gpu).&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Results&lt;/strong&gt;&lt;br /&gt;
-Before I write about these results I must make the disclaimer that my test set was a too small (only 61 training examples) so take them with a grain of salt. So the question is can it play chess? The answer is to an extent. Out of the 61 training examples, 56 of the networks top choices were legal moves. Not only were they legal, but some of them were recommended by hand tuned chess systems. Sometimes the network also made terrible moves. However these moves seemed to occur at the end of the game. I will post the code to build the data and train the network soon so anyone can try to replicate/analyze the results. I just need to clean it up a little first.&lt;/p&gt;
+Before I write about these results I must make the disclaimer that my test set was a too small (only 61 board positions) so take them with a grain of salt. So the question is can it play chess? The answer is to an extent. Out of the 61 board positions, 56 of the networks top choices were legal moves. Not only were they legal, but some of them were recommended by hand tuned chess systems. Sometimes the network also made terrible moves. However these moves seemed to occur at the end of the game. I will post the code to build the data and train the network soon so anyone can try to replicate/analyze the results. I just need to clean it up a little first.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Improvement&lt;/strong&gt;&lt;br /&gt;
 I will try to improve this system in a couple ways. First of all I will train it for longer on a gpu with more training data. I’m hoping this will help its early and middle game selections. Finally I will try to train the network using &lt;a href=&quot;http://www.scholarpedia.org/article/Policy_gradient_methods&quot;&gt;policy gradients&lt;/a&gt; or some similar method. This will allow the network to learn by palying itself and encounter a wider range of board positions that it does now. For example the network does not know how to play from a seriously disadvantaged position because pro games are usually pretty close.&lt;/p&gt;

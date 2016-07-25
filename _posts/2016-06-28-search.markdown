@@ -3,6 +3,7 @@ layout: post
 title:  "The Count of Monte Carlo"
 date:   2016-06-28 12:30:40 -0800
 categories: chess project minimax algorithm search monte carlo
+excerpt: An explantation of the minimax algorithm and a roadmap for the future of the engine.
 ---
 
 <p align="center">

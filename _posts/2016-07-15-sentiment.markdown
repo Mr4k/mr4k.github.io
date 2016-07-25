@@ -3,6 +3,7 @@ layout: post
 title:  "Getting Sentimental"
 date:   2016-07-14 1:40:40 -0800
 categories: sentiment analysis logistic regression n-gram
+excerpt: Simple sentiment classification with an svm.
 ---
 
 <p align="center">

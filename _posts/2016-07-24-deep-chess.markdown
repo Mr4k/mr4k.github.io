@@ -3,6 +3,7 @@ layout: post
 title:  "Regress the Chess"
 date:   2016-07-23 2:50:40 -0800
 categories: neural network deep learning chess training
+excerpt: Using deep learning to predict chess moves.
 ---
 
 <p align="center">
