@@ -58,7 +58,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">Getting Sentimental</h1>
-    <p class="post-meta"><time datetime="2016-07-14T02:40:40-07:00" itemprop="datePublished">Jul 14, 2016</time></p>
+    <p class="post-meta"><time datetime="2016-07-14T05:40:40-04:00" itemprop="datePublished">Jul 14, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -89,12 +89,11 @@ The term frequency of a feature is simply the frequency of the feature in the cu
 </p>
 <p>where N is the total number of documents and <em>df</em> is the number of documents containing our feature. As far as I can tell the <em>log</em> is only there to keep the size of the idf from exploding. The rational behind this term is that features that occur in multiple documents are more likely to provide important clues about the document so they should be weighed higher. “But wait,”, you ask, “what about word like ‘the’, they occur everywhere but are essentially meaningless.” Well the answer is that we ignore the words that occur in too many documents and too few documents. In this way wors like ‘the’ will be ignored because they are too frequent.</p>
 
-<p><strong>Classification</strong>
+<p><strong>Classification</strong><br />
 Now that we have high dimensional representions for the tweets as vectors we just need a way to map those vectors to a sentiment (good or bad in this case). I’ve chosen to a support vector machine to classify the tweets. A support vector machine just finds the hyperplane which best divides the two labeled sets of tweet vectors (good and bad). Then we classify new tweets as good or bad based on which side of the plane they are on.</p>
 
-<p><strong>Code</strong></p>
-
-<p>Below is the full source code. Feel free to run it yourself. You’ll need the sentiment140 data to do so as well as numpy, sci-py and, scikit-learn.</p>
+<p><strong>Code</strong><br />
+Below is the full source code. Feel free to run it yourself. You’ll need the sentiment140 data to do so as well as numpy, sci-py and, scikit-learn.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
@@ -149,7 +148,7 @@ Now that we have high dimensional representions for the tweets as vectors we jus
 	<span class="n">main</span><span class="p">()</span></code></pre></figure>
 
 <p><strong>Improvements</strong><br />
-This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like <a href="https://en.wikipedia.org/wiki/Word2vec">word2vec</a> to understand the meanings of words better, using a more complex classifier than an svm.</p>
+This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like <a href="https://en.wikipedia.org/wiki/Word2vec">word2vec</a> to understand the meanings of words better, using a more complex classifier than a svm.</p>
 
   </div>
 
