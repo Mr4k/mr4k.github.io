@@ -2,13 +2,78 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Peter Stefek</title>
-    <description>I&#39;m a third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
+    <description>I&#39;m a rising third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Jul 2016 17:48:32 -0400</pubDate>
-    <lastBuildDate>Mon, 25 Jul 2016 17:48:32 -0400</lastBuildDate>
+    <pubDate>Sun, 14 Aug 2016 13:57:10 -0700</pubDate>
+    <lastBuildDate>Sun, 14 Aug 2016 13:57:10 -0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Out of My Depth (Part 1)</title>
+        <description>&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/headache.png&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;In computer vision the structure from motion problem is centered around reconstructing a 3d scene from a set of two dimensional images. I’ve always found this idea to be really cool. The app &lt;a href=&quot;http://www.123dapp.com/catch&quot;&gt;123d Catch&lt;/a&gt; by Autodesk is great for playing around with these ideas, allowing you to build 3D models by taking pictures of an object on your phone.&lt;/p&gt;
+
+&lt;p&gt;There are two distinct parts of the structure from motion problem.&lt;/p&gt;
+
+&lt;p&gt;The first part is called feature mapping. Given a set of two dimensional images, the first thing we need to do is identify which parts of one image correspond to parts of the others. This article will not address feature mapping but if you are interested in how it works I would recommend looking at the SIFT or FAST algorithms.&lt;/p&gt;
+
+&lt;p&gt;In this series of articles we will address the second part of the structure from motion problem. Suppose we have two images, I&lt;sub&gt;1&lt;/sub&gt; and I&lt;sub&gt;2&lt;/sub&gt; . We also have some points p&lt;sub&gt;1&lt;/sub&gt; in I&lt;sub&gt;1&lt;/sub&gt; which correspond to the points p&lt;sub&gt;2&lt;/sub&gt; in I&lt;sub&gt;2&lt;/sub&gt;. How can we find the depth of each point?&lt;/p&gt;
+
+&lt;p&gt;To begin we have to talk about cameras. The simplest camera is called a pinhole camera. You’ve probably seen one before in elementary school science class.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/pinhole.gif&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Pinhole Camera Model&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For this algorithm we will assume the camera through which I&lt;sub&gt;1&lt;/sub&gt; and I&lt;sub&gt;2&lt;/sub&gt; were taken is a perfect pinhole camera. This means that the pinhole is really small. We will refer to the back of the camera as the image plane. Because the pinhole is infinitesimally small we know that for any 2d point on the image plane (p&lt;sub&gt;x&lt;/sub&gt;, p&lt;sub&gt;y&lt;/sub&gt;) the corresponding 3d point, (P&lt;sub&gt;x&lt;/sub&gt;, P&lt;sub&gt;y&lt;/sub&gt;, P&lt;sub&gt;z&lt;/sub&gt;), must lie along on a ray which starts at the origin with direction (-p&lt;sub&gt;x&lt;/sub&gt;, -p&lt;sub&gt;y&lt;/sub&gt;, 1). Note that we assume the pinhole is the origin of our the 3d coordinate system. Now we will define the depth of a particular point (λ) as the distance from that point to the origin. All of this is summarized by the following equation (note that we drop a negative sign for simplicity so the sign of λ will flip):&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;(p&lt;sub&gt;x&lt;/sub&gt;, p&lt;sub&gt;y&lt;/sub&gt;, 1) = (P&lt;sub&gt;x&lt;/sub&gt;, P&lt;sub&gt;y&lt;/sub&gt;, P&lt;sub&gt;z&lt;/sub&gt;)
+&lt;/p&gt;
+&lt;p&gt;In vector notation this becomes:&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;p = P
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Two Camera Model&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/twocamera.png&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;Let’s assume we have two perfect pinhole cameras C&lt;sub&gt;1&lt;/sub&gt;, C&lt;sub&gt;2&lt;/sub&gt; each defined by a point in space and the direction it faces. Now for simplicity center the coordinate system around C&lt;sub&gt;1&lt;/sub&gt;, such that it’s center is at the origin and it points straight down the z-axis. Now we know that we there exists an affline transformation (a rotation R and a translation T) which will center the coordinate system around C&lt;sub&gt;2&lt;/sub&gt;. So for any point p in the image plane of C&lt;sub&gt;1&lt;/sub&gt; we can relate it to its corresponding point in the image plane of C&lt;sub&gt;2&lt;/sub&gt; with the equation:&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;&lt;sub&gt;1&lt;/sub&gt;p&lt;sub&gt;1&lt;/sub&gt; = &amp;lambda;&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; + T
+&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Complications&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because λ&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; is contains the product of two unknowns (R and λ&lt;sub&gt;2&lt;/sub&gt;). This makes it very difficult to solve. However in the next article we will use some clever math to turn this into a system of linear equations which can be solved far more easily.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 11 Aug 2016 04:00:50 -0700</pubDate>
+        <link>http://yourdomain.com/neural/network/deep/learning/chess/training/2016/08/11/sfm.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/neural/network/deep/learning/chess/training/2016/08/11/sfm.html</guid>
+        
+        
+        <category>neural</category>
+        
+        <category>network</category>
+        
+        <category>deep</category>
+        
+        <category>learning</category>
+        
+        <category>chess</category>
+        
+        <category>training</category>
+        
+      </item>
     
       <item>
         <title>Regress the Chess</title>
@@ -49,7 +114,7 @@ Before I write about these results I must make the disclaimer that my test set w
 I will try to improve this system in a couple ways. First of all I will train it for longer on a gpu with more training data. I’m hoping this will help its early and middle game selections. Finally I will try to train the network using &lt;a href=&quot;http://www.scholarpedia.org/article/Policy_gradient_methods&quot;&gt;policy gradients&lt;/a&gt; or some similar method. This will allow the network to learn by palying itself and encounter a wider range of board positions that it does now. For example the network does not know how to play from a seriously disadvantaged position because pro games are usually pretty close.&lt;/p&gt;
 
 </description>
-        <pubDate>Sat, 23 Jul 2016 06:50:40 -0400</pubDate>
+        <pubDate>Sat, 23 Jul 2016 03:50:40 -0700</pubDate>
         <link>http://yourdomain.com/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</link>
         <guid isPermaLink="true">http://yourdomain.com/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</guid>
         
@@ -158,7 +223,7 @@ Below is the full source code. Feel free to run it yourself. You’ll need the s
 &lt;p&gt;&lt;strong&gt;Improvements&lt;/strong&gt;&lt;br /&gt;
 This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like &lt;a href=&quot;https://en.wikipedia.org/wiki/Word2vec&quot;&gt;word2vec&lt;/a&gt; to understand the meanings of words better, using a more complex classifier than a svm.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 14 Jul 2016 05:40:40 -0400</pubDate>
+        <pubDate>Thu, 14 Jul 2016 02:40:40 -0700</pubDate>
         <link>http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</link>
         <guid isPermaLink="true">http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</guid>
         
@@ -223,7 +288,7 @@ The draw back to minimax in any form is that it is slow. By that I mean it takes
 This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 28 Jun 2016 16:30:40 -0400</pubDate>
+        <pubDate>Tue, 28 Jun 2016 13:30:40 -0700</pubDate>
         <link>http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</link>
         <guid isPermaLink="true">http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</guid>
         
@@ -261,7 +326,7 @@ I can make excuses. Machine learning can be slow and complicated to run in a bro
 &lt;strong&gt;Hows it been going?&lt;/strong&gt;
 Well today I started by asking some basic questions. Where do I host my application. How do I communicate between the server and the client? What open source javascript projects are out there? And then some more specific questions. What’s a RESTful api? Should I make my server in python or node? Finally some angry questions. What do you mean I can’t send an unencrypted ajax request from a page hosted over https to the server on my laptop? What the hell is https? So overall it went well. Hopefully I’ll finish something that works over the weekend.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 23 Jun 2016 15:17:30 -0400</pubDate>
+        <pubDate>Thu, 23 Jun 2016 12:17:30 -0700</pubDate>
         <link>http://yourdomain.com/chess/project/javascript/python/2016/06/23/building-a-web-application.html</link>
         <guid isPermaLink="true">http://yourdomain.com/chess/project/javascript/python/2016/06/23/building-a-web-application.html</guid>
         
@@ -284,7 +349,7 @@ Well today I started by asking some basic questions. Where do I host my applicat
 
 &lt;p&gt;At some point last semester I was challenged by one of my friends to write a program which could beat him in chess over the summer. This may have come after a series of loses to said friend. Now that summer is here I figure that I might as well try to do it. The caveat is that I am terrible at chess. This means that I cannot write a decent position evaulation function by hand. However I am armed with an &lt;a href=&quot;http://www.ficsgames.org/download.html&quot;&gt;archive&lt;/a&gt; of thousands of chess games and a simple understanding of machine learning techniques. I will try to post regular progress if it occurs.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 20 Jun 2016 14:23:40 -0400</pubDate>
+        <pubDate>Mon, 20 Jun 2016 11:23:40 -0700</pubDate>
         <link>http://yourdomain.com/chess/project/2016/06/20/chess.html</link>
         <guid isPermaLink="true">http://yourdomain.com/chess/project/2016/06/20/chess.html</guid>
         

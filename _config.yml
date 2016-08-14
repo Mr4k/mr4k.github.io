@@ -9,12 +9,10 @@
 title: Peter Stefek
 email: pstefek@oberlin.edu
 description: > # this means to ignore newlines until "baseurl:"
-  I'm a third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
+  I'm a rising third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://yourdomain.com" # the base hostname & protocol for your site
 github_username:  mr4k
-
-background-image: url('social_graph.png')
 
 # Build settings
 markdown: kramdown
