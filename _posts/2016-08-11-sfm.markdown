@@ -48,4 +48,4 @@ Let's assume we have two perfect pinhole cameras C<sub>1</sub>, C<sub>2</sub> ea
 
 **Complications**  
 
-So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because &lambda;<sub>2</sub>Rp<sub>2</sub> is contains the product of two unknowns (R and &lambda;<sub>2</sub>). This makes it very difficult to solve. However in the next article we will use some clever math to turn this into a system of linear equations which can be solved far more easily.
+So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because &lambda;<sub>2</sub>Rp<sub>2</sub> contains the product of two unknowns (R and &lambda;<sub>2</sub>). This makes it very difficult to solve. However in the next article we will use some clever math to turn this into a system of linear equations which can be solved far more easily.
