@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 Aug 2016 13:57:10 -0700</pubDate>
-    <lastBuildDate>Sun, 14 Aug 2016 13:57:10 -0700</lastBuildDate>
+    <pubDate>Sun, 14 Aug 2016 15:22:21 -0700</pubDate>
+    <lastBuildDate>Sun, 14 Aug 2016 15:22:21 -0700</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -54,24 +54,24 @@
 
 &lt;p&gt;&lt;strong&gt;Complications&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because λ&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; is contains the product of two unknowns (R and λ&lt;sub&gt;2&lt;/sub&gt;). This makes it very difficult to solve. However in the next article we will use some clever math to turn this into a system of linear equations which can be solved far more easily.&lt;/p&gt;
+&lt;p&gt;So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because λ&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; contains the product of two unknowns (R and λ&lt;sub&gt;2&lt;/sub&gt;). This makes it very difficult to solve. However in the next article we will use some clever math to turn this into a system of linear equations which can be solved far more easily.&lt;/p&gt;
 </description>
         <pubDate>Thu, 11 Aug 2016 04:00:50 -0700</pubDate>
-        <link>http://yourdomain.com/neural/network/deep/learning/chess/training/2016/08/11/sfm.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/neural/network/deep/learning/chess/training/2016/08/11/sfm.html</guid>
+        <link>http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/11/sfm.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/11/sfm.html</guid>
         
         
-        <category>neural</category>
+        <category>structure</category>
         
-        <category>network</category>
+        <category>from</category>
         
-        <category>deep</category>
+        <category>motion</category>
         
-        <category>learning</category>
+        <category>depth</category>
         
-        <category>chess</category>
+        <category>linear</category>
         
-        <category>training</category>
+        <category>algebra</category>
         
       </item>
     
