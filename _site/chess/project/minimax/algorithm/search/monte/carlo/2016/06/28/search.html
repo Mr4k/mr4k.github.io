@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>The Count of Monte Carlo</title>
-  <meta name="description" content="An explantation of the minimax algorithm and a roadmap for the future of the engine.">
+  <meta name="description" content="An explantation of the minimax algorithm and its applications to chess.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html">
@@ -58,7 +58,7 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">The Count of Monte Carlo</h1>
-    <p class="post-meta"><time datetime="2016-06-28T13:30:40-07:00" itemprop="datePublished">Jun 28, 2016</time></p>
+    <p class="post-meta"><time datetime="2016-06-28T22:30:40+02:00" itemprop="datePublished">Jun 28, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -66,7 +66,7 @@
 	<img src="/tree_comic.png" /> 
 </p>
 
-<p>So over the weekend I built the server and client side of the chess playing system. I ended up using <a href="http://flask.pocoo.org/">Flask</a> for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) <a href="http://playchess-pstefek.rhcloud.com/">here</a>. You can also view the source code on <a href="https://github.com/Mr4k/playchess">github</a> but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.</p>
+<p>A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using <a href="http://flask.pocoo.org/">Flask</a> for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) <a href="http://playchess-pstefek.rhcloud.com/">here</a>. You can also view the source code on <a href="https://github.com/Mr4k/playchess">github</a> but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.</p>
 
 <p><strong>The Current Algorithm</strong>
 The current algorithm I am using is pretty simple. There are two main components, search and evaluation.</p>
@@ -105,7 +105,7 @@ While I think I will hold onto the search and evaluate model, I think there are 
 The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.</p>
 
 <p><strong>Improving the evaluation function</strong>
-This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.</p>
+This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.</p>
 
 
   </div>

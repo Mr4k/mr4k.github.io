@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 14 Aug 2016 15:22:21 -0700</pubDate>
-    <lastBuildDate>Sun, 14 Aug 2016 15:22:21 -0700</lastBuildDate>
+    <pubDate>Sun, 21 Aug 2016 11:12:11 +0200</pubDate>
+    <lastBuildDate>Sun, 21 Aug 2016 11:12:11 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -54,9 +54,9 @@
 
 &lt;p&gt;&lt;strong&gt;Complications&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because λ&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; contains the product of two unknowns (R and λ&lt;sub&gt;2&lt;/sub&gt;). This makes it very difficult to solve. However in the next article we will use some clever math to turn this into a system of linear equations which can be solved far more easily.&lt;/p&gt;
+&lt;p&gt;So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because λ&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; contains the product of two unknowns (R and λ&lt;sub&gt;2&lt;/sub&gt;). This makes it very difficult to solve. However in the next article we will use some clever math turn this into a system we can solve.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Aug 2016 04:00:50 -0700</pubDate>
+        <pubDate>Thu, 11 Aug 2016 13:00:50 +0200</pubDate>
         <link>http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/11/sfm.html</link>
         <guid isPermaLink="true">http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/11/sfm.html</guid>
         
@@ -114,7 +114,7 @@ Before I write about these results I must make the disclaimer that my test set w
 I will try to improve this system in a couple ways. First of all I will train it for longer on a gpu with more training data. I’m hoping this will help its early and middle game selections. Finally I will try to train the network using &lt;a href=&quot;http://www.scholarpedia.org/article/Policy_gradient_methods&quot;&gt;policy gradients&lt;/a&gt; or some similar method. This will allow the network to learn by palying itself and encounter a wider range of board positions that it does now. For example the network does not know how to play from a seriously disadvantaged position because pro games are usually pretty close.&lt;/p&gt;
 
 </description>
-        <pubDate>Sat, 23 Jul 2016 03:50:40 -0700</pubDate>
+        <pubDate>Sat, 23 Jul 2016 12:50:40 +0200</pubDate>
         <link>http://yourdomain.com/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</link>
         <guid isPermaLink="true">http://yourdomain.com/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</guid>
         
@@ -223,7 +223,7 @@ Below is the full source code. Feel free to run it yourself. You’ll need the s
 &lt;p&gt;&lt;strong&gt;Improvements&lt;/strong&gt;&lt;br /&gt;
 This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like &lt;a href=&quot;https://en.wikipedia.org/wiki/Word2vec&quot;&gt;word2vec&lt;/a&gt; to understand the meanings of words better, using a more complex classifier than a svm.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 14 Jul 2016 02:40:40 -0700</pubDate>
+        <pubDate>Thu, 14 Jul 2016 11:40:40 +0200</pubDate>
         <link>http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</link>
         <guid isPermaLink="true">http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</guid>
         
@@ -246,7 +246,7 @@ This solution is only 80% accurate on the test set. That is a significant improv
 	&lt;img src=&quot;/tree_comic.png&quot; /&gt; 
 &lt;/p&gt;
 
-&lt;p&gt;So over the weekend I built the server and client side of the chess playing system. I ended up using &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) &lt;a href=&quot;http://playchess-pstefek.rhcloud.com/&quot;&gt;here&lt;/a&gt;. You can also view the source code on &lt;a href=&quot;https://github.com/Mr4k/playchess&quot;&gt;github&lt;/a&gt; but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.&lt;/p&gt;
+&lt;p&gt;A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) &lt;a href=&quot;http://playchess-pstefek.rhcloud.com/&quot;&gt;here&lt;/a&gt;. You can also view the source code on &lt;a href=&quot;https://github.com/Mr4k/playchess&quot;&gt;github&lt;/a&gt; but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The Current Algorithm&lt;/strong&gt;
 The current algorithm I am using is pretty simple. There are two main components, search and evaluation.&lt;/p&gt;
@@ -285,10 +285,10 @@ While I think I will hold onto the search and evaluate model, I think there are 
 The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Improving the evaluation function&lt;/strong&gt;
-This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.&lt;/p&gt;
+This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 28 Jun 2016 13:30:40 -0700</pubDate>
+        <pubDate>Tue, 28 Jun 2016 22:30:40 +0200</pubDate>
         <link>http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</link>
         <guid isPermaLink="true">http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</guid>
         
@@ -306,57 +306,6 @@ This is where I am going to try machine learning. Chess is a nuanced game. A wel
         <category>monte</category>
         
         <category>carlo</category>
-        
-      </item>
-    
-      <item>
-        <title>Tangled Up in the Web</title>
-        <description>&lt;p align=&quot;center&quot;&gt;
-	&lt;img src=&quot;/webdev.png&quot; /&gt; 
-&lt;/p&gt;
-
-&lt;p&gt;While I am trying to figure out how to actually build a chess algorithm I am working on other parts of the project. While googling the word chess (always a good way to start) I found several nice javascript frameworks conviently called &lt;a href=&quot;http://chessboardjs.com/&quot;&gt;chessboard.js&lt;/a&gt; and &lt;a href=&quot;https://github.com/jhlywa/chess.js&quot;&gt;chess.js&lt;/a&gt;. So feature creep kicked in and I decided to build a web interface to my chess engine. There are a couple nice things about this including the fact that I can easily send a link to my friend in South Africa when it’s done. It will also look pretty which is nice. Currently the application I am envisioning looks something like this:&lt;/p&gt;
-
-&lt;p align=&quot;center&quot;&gt;
-	&lt;img src=&quot;/overview.png&quot; /&gt; 
-&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Why am I not doing it all client side?&lt;/strong&gt;
-I can make excuses. Machine learning can be slow and complicated to run in a browser. Tensorflow doesn’t have an offical javascript port. I need easy access to the gpu. But honestly it mostly comes down to the fact that I really want to try to build a (simple) full stack web application. I have not had much experience with web development and I want get some more experience.  &lt;br /&gt;
-&lt;strong&gt;Hows it been going?&lt;/strong&gt;
-Well today I started by asking some basic questions. Where do I host my application. How do I communicate between the server and the client? What open source javascript projects are out there? And then some more specific questions. What’s a RESTful api? Should I make my server in python or node? Finally some angry questions. What do you mean I can’t send an unencrypted ajax request from a page hosted over https to the server on my laptop? What the hell is https? So overall it went well. Hopefully I’ll finish something that works over the weekend.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 23 Jun 2016 12:17:30 -0700</pubDate>
-        <link>http://yourdomain.com/chess/project/javascript/python/2016/06/23/building-a-web-application.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/chess/project/javascript/python/2016/06/23/building-a-web-application.html</guid>
-        
-        
-        <category>chess</category>
-        
-        <category>project</category>
-        
-        <category>javascript</category>
-        
-        <category>python</category>
-        
-      </item>
-    
-      <item>
-        <title>Chess</title>
-        <description>&lt;p align=&quot;center&quot;&gt;
-	&lt;img align=&quot;up&quot; src=&quot;/chess.gif&quot; /&gt; 
-&lt;/p&gt;
-
-&lt;p&gt;At some point last semester I was challenged by one of my friends to write a program which could beat him in chess over the summer. This may have come after a series of loses to said friend. Now that summer is here I figure that I might as well try to do it. The caveat is that I am terrible at chess. This means that I cannot write a decent position evaulation function by hand. However I am armed with an &lt;a href=&quot;http://www.ficsgames.org/download.html&quot;&gt;archive&lt;/a&gt; of thousands of chess games and a simple understanding of machine learning techniques. I will try to post regular progress if it occurs.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 20 Jun 2016 11:23:40 -0700</pubDate>
-        <link>http://yourdomain.com/chess/project/2016/06/20/chess.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/chess/project/2016/06/20/chess.html</guid>
-        
-        
-        <category>chess</category>
-        
-        <category>project</category>
         
       </item>
     

@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css?family=Bitter|Source+Sans+Pro";
+@import "https://fonts.googleapis.com/css?family=Indie+Flower|Raleway";
 /**
  * Reset some basic elements
  */
@@ -9,10 +9,13 @@ dl, dd, ol, ul, figure {
   padding: 0; }
 
 /**
+* Rainbow block style
+*/
+/**
  * Basic styling
  */
 body {
-  font: 400 15px/1.5 "Bitter", serif;
+  font: 300 15px/1.5 "Raleway", sans-serif;
   color: #111;
   background-color: #fcfdfd;
   -webkit-text-size-adjust: 100%;
@@ -61,7 +64,7 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400; }
+  font-weight: 300; }
 
 /**
  * Links
@@ -281,6 +284,7 @@ pre {
   .post-list a {
     color: #111;
     text-decoration: none;
+    font-family: "Indie Flower", cursive;
     font-weight: bold; }
     .post-list a:hover {
       color: #ADD8E6; }
@@ -291,7 +295,7 @@ pre {
 
 .post-link {
   display: block;
-  font-size: 24px; }
+  font-size: 30px; }
 
 /**
 * Center

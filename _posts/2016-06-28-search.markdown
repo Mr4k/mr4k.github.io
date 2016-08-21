@@ -3,14 +3,14 @@ layout: post
 title:  "The Count of Monte Carlo"
 date:   2016-06-28 12:30:40 -0800
 categories: chess project minimax algorithm search monte carlo
-excerpt: An explantation of the minimax algorithm and a roadmap for the future of the engine.
+excerpt: An explantation of the minimax algorithm and its applications to chess.
 ---
 
 <p align="center">
 	<img src="/tree_comic.png"> 
 </p>
 
-So over the weekend I built the server and client side of the chess playing system. I ended up using [Flask](http://flask.pocoo.org/) for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) [here](http://playchess-pstefek.rhcloud.com/). You can also view the source code on [github](https://github.com/Mr4k/playchess) but be warned, I have not cleaned it up yet. Although I have a working application I'm far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.
+A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using [Flask](http://flask.pocoo.org/) for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) [here](http://playchess-pstefek.rhcloud.com/). You can also view the source code on [github](https://github.com/Mr4k/playchess) but be warned, I have not cleaned it up yet. Although I have a working application I'm far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.
 
 **The Current Algorithm**
 The current algorithm I am using is pretty simple. There are two main components, search and evaluation.  
@@ -49,7 +49,7 @@ While I think I will hold onto the search and evaluate model, I think there are 
 The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can't look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.  
 
 **Improving the evaluation function**
-This is where I am going to try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it's usually not. I'm hoping that thousands of previous chess games describe these situations better than I can.
+This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it's usually not. I'm hoping that thousands of previous chess games describe these situations better than I can.
 
 
 
