@@ -23,16 +23,16 @@
 
     <a class="site-title" href="/">Peter Stefek</a>
 
-    <nav class="site-nav">
+    <!--<nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
           <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
           <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
           <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
         </svg>
-      </a>
+      </a>!-->
 
-      <div class="trigger">
+      <!--<div class="trigger">
         
           
           <a class="page-link" href="/about/">About</a>
@@ -44,8 +44,12 @@
         
           
         
+          
+          <a class="page-link" href="/projects/">Projects</a>
+          
+        
       </div>
-    </nav>
+    </nav> !-->
 
   </div>
 
@@ -63,21 +67,23 @@
 
   <div class="post-content" itemprop="articleBody">
     <p align="center">
-	<img src="/tree_comic.png" /> 
+	<img src="/blog/tree_comic.png" /> 
 </p>
 
 <p>A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using <a href="http://flask.pocoo.org/">Flask</a> for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) <a href="http://playchess-pstefek.rhcloud.com/">here</a>. You can also view the source code on <a href="https://github.com/Mr4k/playchess">github</a> but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.</p>
 
-<p><strong>The Current Algorithm</strong>
-The current algorithm I am using is pretty simple. There are two main components, search and evaluation.</p>
+<p><strong>The Current Algorithm</strong></p>
 
-<p><strong>The Search Algorithm</strong>
-Right now I am using a search algorithm called minimax along with a technique called alpha beta pruning. The basic principle behind 2 player minimax is that the best move is the one which minimizes your opponent’s potential gain. Before we look at how this applies to chess let’s look at a very simple example.</p>
+<p>The current algorithm I am using is pretty simple. There are two main components, search and evaluation.</p>
+
+<p><strong>The Search Algorithm</strong></p>
+
+<p>Right now I am using a search algorithm called minimax along with a technique called alpha beta pruning. The basic principle behind 2 player minimax is that the best move is the one which minimizes your opponent’s potential gain. Before we look at how this applies to chess let’s look at a very simple example.</p>
 
 <p>In traditional math style, Alice and Bob are bored at home and decided to play chess. Because Alice is a chess prodigy, she destroys Bob five to nothing. To make him feel better, Alice challenges him to a new game called Trenchwaffle which heavily favors Bob. In Trenchwaffle each player can either dig a trench (branch right) or eat a waffle (branch left). There are only three turns in the whole game (Bob moves, then Alice moves, then Bob moves once more). Although the rules of Trenchwaffle are vague and mysterious we manage to procure a complete <a href="https://en.wikipedia.org/wiki/Game_tree">game tree</a>. So the question is should Bob eat a waffle (branch left) or dig a trench (branch right)? The following diagram shows how to use the minimax algorithm to figure out which move Bob should make:</p>
 
 <p align="center">
-	<img src="/trenchwaffle.png" /> 
+	<img src="/blog/trenchwaffle.png" /> 
 </p>
 
 <p>According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is a <a href="https://en.wikipedia.org/wiki/Solved_game">solvable</a> minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn’t <a href="https://en.wikipedia.org/wiki/Solving_chess">chess solvable</a>? The answer is that the game tree for chess is far too big to compute in full. The average <a href="https://en.wikipedia.org/wiki/Branching_factor">branching factor</a> for chess is around 36. So the sixth layer of the game tree contains around 36<sup>6</sup> moves. The tenth layer contains around 36<sup>10</sup> moves.</p>
@@ -98,14 +104,17 @@ Right now I am using a search algorithm called minimax along with a technique ca
 
 <p>It’s defintely not great and I am sure someone who was good at chess could write me a better one. However I have some other ideas to improve the evaluation function.</p>
 
-<p><strong>The Future</strong>
-While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.</p>
+<p><strong>The Future</strong></p>
 
-<p><strong>Improving Search</strong>
-The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.</p>
+<p>While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.</p>
 
-<p><strong>Improving the evaluation function</strong>
-This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.</p>
+<p><strong>Improving Search</strong></p>
+
+<p>The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.</p>
+
+<p><strong>Improving the evaluation function</strong></p>
+
+<p>This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.</p>
 
 
   </div>
@@ -115,7 +124,7 @@ This is where I might try machine learning. Chess is a nuanced game. A well plac
       </div>
     </div>
 
-    <footer class="site-footer">
+    <!--<footer class="site-footer">
 
   <div class="wrapper">
 
@@ -151,7 +160,7 @@ This is where I might try machine learning. Chess is a nuanced game. A well plac
 
   </div>
 
-</footer>
+</footer> !-->
 
 
   </body>

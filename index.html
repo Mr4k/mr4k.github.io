@@ -5,18 +5,30 @@ layout: default
 <div class="home">
   <div class="center-text">
 
-    <p align="center">
-      <img src="/scroll.png" height="42" width="42"> 
+    {% for my_page in site.pages %}
+      <div class="bottom-three"> 
+        {% if my_page.title %}
+          <div class="post-link"> {{ my_page.title }} </div>
+          <div class="post-meta" markdown="1"> {{ my_page.content }} </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+   
+
+    <p>
+      <img src="/scroll.png" height="32em" width="32em"> 
+      
+      <hr style="text-align:center; width:15%"> 
     </p>
 
     <ul class="post-list">
       {% for post in site.posts %}
         <li>
-          <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-          <h2>
+          <div>
             <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          </h2>
+            <i><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span></i>
+          </div>
+
           <div class="post-meta">
             {{ post.excerpt }}
           </div>
@@ -24,6 +36,6 @@ layout: default
       {% endfor %}
     </ul>
 
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    <!--<p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>!-->
   </div>
 </div>

@@ -7,21 +7,23 @@ excerpt: An explantation of the minimax algorithm and its applications to chess.
 ---
 
 <p align="center">
-	<img src="/tree_comic.png"> 
+	<img src="/blog/tree_comic.png"> 
 </p>
 
 A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using [Flask](http://flask.pocoo.org/) for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) [here](http://playchess-pstefek.rhcloud.com/). You can also view the source code on [github](https://github.com/Mr4k/playchess) but be warned, I have not cleaned it up yet. Although I have a working application I'm far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.
 
-**The Current Algorithm**
+**The Current Algorithm**  
+
 The current algorithm I am using is pretty simple. There are two main components, search and evaluation.  
 
-**The Search Algorithm**
+**The Search Algorithm** 
+
 Right now I am using a search algorithm called minimax along with a technique called alpha beta pruning. The basic principle behind 2 player minimax is that the best move is the one which minimizes your opponent's potential gain. Before we look at how this applies to chess let's look at a very simple example.  
 
 In traditional math style, Alice and Bob are bored at home and decided to play chess. Because Alice is a chess prodigy, she destroys Bob five to nothing. To make him feel better, Alice challenges him to a new game called Trenchwaffle which heavily favors Bob. In Trenchwaffle each player can either dig a trench (branch right) or eat a waffle (branch left). There are only three turns in the whole game (Bob moves, then Alice moves, then Bob moves once more). Although the rules of Trenchwaffle are vague and mysterious we manage to procure a complete [game tree](https://en.wikipedia.org/wiki/Game_tree). So the question is should Bob eat a waffle (branch left) or dig a trench (branch right)? The following diagram shows how to use the minimax algorithm to figure out which move Bob should make:
 
 <p align="center">
-	<img src="/trenchwaffle.png"> 
+	<img src="/blog/trenchwaffle.png"> 
 </p>
 
 According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is a [solvable](https://en.wikipedia.org/wiki/Solved_game) minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn't [chess solvable](https://en.wikipedia.org/wiki/Solving_chess)? The answer is that the game tree for chess is far too big to compute in full. The average [branching factor](https://en.wikipedia.org/wiki/Branching_factor) for chess is around 36. So the sixth layer of the game tree contains around 36<sup>6</sup> moves. The tenth layer contains around 36<sup>10</sup> moves.  
@@ -42,13 +44,16 @@ function evaluate(board)
 
 It's defintely not great and I am sure someone who was good at chess could write me a better one. However I have some other ideas to improve the evaluation function.  
 
-**The Future**
+**The Future**  
+
 While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.  
 
-**Improving Search**
+**Improving Search**  
+
 The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can't look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.  
 
-**Improving the evaluation function**
+**Improving the evaluation function**  
+
 This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it's usually not. I'm hoping that thousands of previous chess games describe these situations better than I can.
 
 

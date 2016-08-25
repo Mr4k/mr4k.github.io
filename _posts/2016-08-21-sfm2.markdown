@@ -1,0 +1,51 @@
+---
+layout: post
+title:  "Out of My Depth (Part 1)"
+date:   2016-08-11 3:00:50 -0800
+categories: structure from motion depth linear algebra
+excerpt: Recovering 3 dimensional depth information from pairs of photographs. 
+---
+
+<p align="center">
+	<img src="/blog/headache.png"> 
+</p>  
+
+In computer vision the structure from motion problem is centered around reconstructing a 3d scene from a set of two dimensional images. I've always found this idea to be really cool. The app [123d Catch](http://www.123dapp.com/catch) by Autodesk is great for playing around with these ideas, allowing you to build 3D models by taking pictures of an object on your phone. 
+
+There are two distinct parts of the structure from motion problem.  
+
+The first part is called feature mapping. Given a set of two dimensional images, the first thing we need to do is identify which parts of one image correspond to parts of the others. This article will not address feature mapping but if you are interested in how it works I would recommend looking at the SIFT or FAST algorithms.  
+
+In this series of articles we will address the second part of the structure from motion problem. Suppose we have two images, I<sub>1</sub> and I<sub>2</sub> . We also have some points p<sub>1</sub> in I<sub>1</sub> which correspond to the points p<sub>2</sub> in I<sub>2</sub>. How can we find the depth of each point?  
+
+To begin we have to talk about cameras. The simplest camera is called a pinhole camera. You've probably seen one before in elementary school science class.
+
+<p align="center">
+	<img src="/blog/pinhole.gif"> 
+</p>  
+
+**The Pinhole Camera Model**  
+
+For this algorithm we will assume the camera through which I<sub>1</sub> and I<sub>2</sub> were taken is a perfect pinhole camera. This means that the pinhole is really small. We will refer to the back of the camera as the image plane. Because the pinhole is infinitesimally small we know that for any 2d point on the image plane (p<sub>x</sub>, p<sub>y</sub>) the corresponding 3d point, (P<sub>x</sub>, P<sub>y</sub>, P<sub>z</sub>), must lie along on a ray which starts at the origin with direction (-p<sub>x</sub>, -p<sub>y</sub>, 1). Note that we assume the pinhole is the origin of our the 3d coordinate system. Now we will define the depth of a particular point (&lambda;) as the distance from that point to the origin. All of this is summarized by the following equation (note that we drop a negative sign for simplicity so the sign of &lambda; will flip):  
+<p align="center"> 
+	&lambda;(p<sub>x</sub>, p<sub>y</sub>, 1) = (P<sub>x</sub>, P<sub>y</sub>, P<sub>z</sub>)
+</p>  
+In vector notation this becomes:
+<p align="center"> 
+	&lambda;p = P
+</p>  
+
+**The Two Camera Model**
+
+<p align="center">
+	<img src="/blog/twocamera.png"> 
+</p>  
+
+Let's assume we have two perfect pinhole cameras C<sub>1</sub>, C<sub>2</sub> each defined by a point in space and the direction it faces. Now for simplicity center the coordinate system around C<sub>1</sub>, such that it's center is at the origin and it points straight down the z-axis. Now we know that we there exists an affline transformation (a rotation R and a translation T) which will center the coordinate system around C<sub>2</sub>. So for any point p in the image plane of C<sub>1</sub> we can relate it to its corresponding point in the image plane of C<sub>2</sub> with the equation:
+<p align="center"> 
+	&lambda;<sub>1</sub>p<sub>1</sub> = &lambda;<sub>2</sub>Rp<sub>2</sub> + T
+</p>  
+
+**Complications**  
+
+So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because &lambda;<sub>2</sub>Rp<sub>2</sub> contains the product of two unknowns (R and &lambda;<sub>2</sub>). This makes it very difficult to solve. However in the next article we will use some clever math turn this into a system we can solve.

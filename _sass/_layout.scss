@@ -215,12 +215,16 @@
     font-size: $title-font-size;
 }
 
+ .bottom-three {
+     margin-bottom: 3%;
+  }
+
 /**
 * Center
 */
 
 .center-text{
-    text-align: center;
+    /*text-align: center;*/
 }
 
 /**
@@ -249,6 +253,7 @@
         @include media-query($on-laptop) {
             font-size: 28px;
         }
+        width: 20%;
     }
 
     h3 {

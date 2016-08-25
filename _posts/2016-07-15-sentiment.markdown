@@ -7,7 +7,7 @@ excerpt: Simple sentiment classification with an svm.
 ---
 
 <p align="center">
-	<img src="/t-wex.png"> 
+	<img src="/blog/t-wex.png"> 
 </p>
 
 I just got back from a week long backpacking trip. I decided that I was going to take a break from my chess engine to do a couple quick experiments in other areas of machine learning. Yesterday I wrote a simple sentiment analyzer in 50 lines of python. In this post I will explain what I did and how it could be improved.  
@@ -31,7 +31,7 @@ tweet = 'I am a drama llama'
 Our feature space is contructed by feeding all of our training data into this model. To convert a tweet to a vector all we do is make a vector which counts how many times each feature occurs in the tweet multiplied by two scalar terms called the term frequency and the inverse document frequency (idf).  
 The term frequency of a feature is simply the frequency of the feature in the current document(tweet). The rational behind the tf is that words that occur more might matter more. The inverse document frequency is defined as follows,  
 <p align="center">
-	<img src="/idf.png"> 
+	<img src="/blog/idf.png"> 
 </p>
 where N is the total number of documents and *df* is the number of documents containing our feature. As far as I can tell the *log* is only there to keep the size of the idf from exploding. The rational behind this term is that features that occur in multiple documents are more likely to provide important clues about the document so they should be weighed higher. "But wait,", you ask, "what about word like 'the', they occur everywhere but are essentially meaningless." Well the answer is that we ignore the words that occur in too many documents and too few documents. In this way wors like 'the' will be ignored because they are too frequent.  
 
