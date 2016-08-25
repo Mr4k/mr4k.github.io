@@ -8,12 +8,24 @@ layout: default
     {% for my_page in site.pages %}
       <div class="bottom-three"> 
         {% if my_page.title %}
-          <div class="post-link"> {{ my_page.title }} </div>
-          <div class="post-meta" markdown="1"> {{ my_page.content }} </div>
+          {% if my_page.embed %}
+            <div class="post-link"> {{ my_page.title }} </div>
+            <div class="post-meta" markdown="1"> {{ my_page.content }} </div>
+          {% endif %}
         {% endif %}
       </div>
     {% endfor %}
    
+    <div class="bottom-three"> 
+      <div class="post-link"> Projects </div>
+      {% for my_page in site.pages %}
+          {% if my_page.title %}
+            {% if my_page.project %}
+              <div class="post-meta" markdown="1"> <b><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></b> <i> -  {{ my_page.excerpt }}</i> </div>
+            {% endif %}
+          {% endif %}
+      {% endfor %}
+  </div> 
 
     <p>
       <img src="/scroll.png" height="32em" width="32em"> 

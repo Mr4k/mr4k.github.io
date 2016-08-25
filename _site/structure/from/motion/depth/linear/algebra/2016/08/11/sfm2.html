@@ -43,9 +43,9 @@
           
         
           
-        
+          <a class="page-link" href="/projects/iris.html">Iris</a>
           
-          <a class="page-link" href="/projects/">Projects</a>
+        
           
         
       </div>
@@ -67,7 +67,7 @@
 
   <div class="post-content" itemprop="articleBody">
     <p align="center">
-	<img src="/blog/headache.png" /> 
+	<img src="/headache.png" /> 
 </p>
 
 <p>In computer vision the structure from motion problem is centered around reconstructing a 3d scene from a set of two dimensional images. I’ve always found this idea to be really cool. The app <a href="http://www.123dapp.com/catch">123d Catch</a> by Autodesk is great for playing around with these ideas, allowing you to build 3D models by taking pictures of an object on your phone.</p>
@@ -81,7 +81,7 @@
 <p>To begin we have to talk about cameras. The simplest camera is called a pinhole camera. You’ve probably seen one before in elementary school science class.</p>
 
 <p align="center">
-	<img src="/blog/pinhole.gif" /> 
+	<img src="/pinhole.gif" /> 
 </p>
 
 <p><strong>The Pinhole Camera Model</strong></p>
@@ -98,7 +98,7 @@
 <p><strong>The Two Camera Model</strong></p>
 
 <p align="center">
-	<img src="/blog/twocamera.png" /> 
+	<img src="/twocamera.png" /> 
 </p>
 
 <p>Let’s assume we have two perfect pinhole cameras C<sub>1</sub>, C<sub>2</sub> each defined by a point in space and the direction it faces. Now for simplicity center the coordinate system around C<sub>1</sub>, such that it’s center is at the origin and it points straight down the z-axis. Now we know that we there exists an affline transformation (a rotation R and a translation T) which will center the coordinate system around C<sub>2</sub>. So for any point p in the image plane of C<sub>1</sub> we can relate it to its corresponding point in the image plane of C<sub>2</sub> with the equation:</p>
