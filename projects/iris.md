@@ -5,7 +5,7 @@ excerpt: A puzzle game about blending colors.
 project: 1
 ---
 
-Iris is a puzzle game that I built along with Simon Ever-Hale, Sam Grund, and Jonah Bregstone. It started out as a project from a game design class. We are currently porting it to moblie and html5.
+Iris is a puzzle game that I built along with Simon Ever-Hale, Sam Grund, and Jonah Bregstone. It started out as a project from a game design class. We are currently porting it to mobile and html5.
 
 <p align="center">
 	<img src="/iris-screenshot.png" width = "400"> 
