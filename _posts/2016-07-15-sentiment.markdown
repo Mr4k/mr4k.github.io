@@ -7,7 +7,7 @@ excerpt: Simple sentiment classification with an svm.
 ---
 
 <p align="center">
-	<img src="/blog/t-wex.png"> 
+	<img src="/t-wex.png"> 
 </p>
 
 I just got back from a week long backpacking trip. I decided that I was going to take a break from my chess engine to do a couple quick experiments in other areas of machine learning. Yesterday I wrote a simple sentiment analyzer in 50 lines of python. In this post I will explain what I did and how it could be improved.  
