@@ -7,5 +7,5 @@ excerpt: An introduction to the essential matrix.
 ---
 
 <p align="center">
-	<img src="/blog/matrix_transform.png"> 
+	<img src="/matrix_transform.png"> 
 </p>

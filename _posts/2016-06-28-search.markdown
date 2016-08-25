@@ -7,7 +7,7 @@ excerpt: An explantation of the minimax algorithm and its applications to chess.
 ---
 
 <p align="center">
-	<img src="/blog/tree_comic.png"> 
+	<img src="/tree_comic.png"> 
 </p>
 
 A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using [Flask](http://flask.pocoo.org/) for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) [here](http://playchess-pstefek.rhcloud.com/). You can also view the source code on [github](https://github.com/Mr4k/playchess) but be warned, I have not cleaned it up yet. Although I have a working application I'm far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.
