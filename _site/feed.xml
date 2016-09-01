@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 26 Aug 2016 10:10:22 +0200</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2016 10:10:22 +0200</lastBuildDate>
+    <pubDate>Thu, 01 Sep 2016 19:24:04 +0200</pubDate>
+    <lastBuildDate>Thu, 01 Sep 2016 19:24:04 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -15,6 +15,78 @@
         <description>&lt;p align=&quot;center&quot;&gt;
 	&lt;img src=&quot;/matrix_transform.png&quot; /&gt; 
 &lt;/p&gt;
+
+&lt;p&gt;In the next part in this series of articles about depth recontruction we will talk about the essential matrix. Before we define it we have to look back at another mathamatical idea.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Cross Product&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/cross-prod.png&quot; height=&quot;300&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;As many readers will know, the cross product takes two vectors and cretes a vector perpendicular to both of them. It is important to note that if the two vectors are not independent (that is if one vector is a scalar multiple of the other) then the cross product is the zero vector. What does the cross product actually look like?&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/cross-equation.gif&quot; height=&quot;75&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;Truthfully they’re are better ways to think of the cross product but this one is useful because it allows us to see exactly what the end result of the cross product is. This brings us to the next concept. For any vector a, we can make a matrix C(a) such that for any vector b, a x b = C(a)b.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/cross-matrix.gif&quot; height=&quot;75&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;So why is this useful? Well remember the equation from the end of the &lt;a href=&quot;% post_url 2016-08-21-sfm2 %&quot;&gt;last post&lt;/a&gt;?&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;&lt;sub&gt;1&lt;/sub&gt;p&lt;sub&gt;1&lt;/sub&gt; = &amp;lambda;&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; + T
+&lt;/p&gt;
+
+&lt;p&gt;Well now what if we take C(T) and multiple by it on the right.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;&lt;sub&gt;1&lt;/sub&gt;C(T)p&lt;sub&gt;1&lt;/sub&gt; = &amp;lambda;&lt;sub&gt;2&lt;/sub&gt;C(T)Rp&lt;sub&gt;2&lt;/sub&gt; + C(T)T
+&lt;/p&gt;
+
+&lt;p&gt;Notice that C(T)T is the zero vector because you are crossing T with itself.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;&lt;sub&gt;1&lt;/sub&gt;C(T)p&lt;sub&gt;1&lt;/sub&gt; = &amp;lambda;&lt;sub&gt;2&lt;/sub&gt;C(T)Rp&lt;sub&gt;2&lt;/sub&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Now we get a little more clever and multiply both sides on the right by p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	&amp;lambda;&lt;sub&gt;1&lt;/sub&gt;p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;C(T)p&lt;sub&gt;1&lt;/sub&gt; = &amp;lambda;&lt;sub&gt;2&lt;/sub&gt;p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;C(T)Rp&lt;sub&gt;2&lt;/sub&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Now we know that p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;C(T)p&lt;sub&gt;1&lt;/sub&gt; = 0 because C(T)p&lt;sub&gt;1&lt;/sub&gt; is perpendicular to p&lt;sub&gt;1&lt;/sub&gt; and multiplication by p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt; is equivalent to a dot product. So our equation becomes:&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	0 = &amp;lambda;&lt;sub&gt;2&lt;/sub&gt;p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;C(T)Rp&lt;sub&gt;2&lt;/sub&gt;
+&lt;/p&gt;
+
+&lt;p&gt;We can divide by λ&lt;sub&gt;2&lt;/sub&gt; to get:&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	0 = p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;C(T)Rp&lt;sub&gt;2&lt;/sub&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Finally we will define the essential matrix:&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	E := C(T)R
+&lt;/p&gt;
+
+&lt;p&gt;We can rewrite the equation above in terms of this new definition.&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt; 
+	0 = p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;Ep&lt;sub&gt;2&lt;/sub&gt;
+&lt;/p&gt;
+
+&lt;p&gt;So why did we go through all this work just to get this new matrix? Well E provides a linear relation between p&lt;sub&gt;1&lt;/sub&gt; and p&lt;sub&gt;2&lt;/sub&gt;. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).&lt;/p&gt;
+
+&lt;p&gt;Is that it, is E just a meaningless intermediate step. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues).&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Aug 2016 14:01:00 +0200</pubDate>
         <link>http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/20/sfm.html</link>

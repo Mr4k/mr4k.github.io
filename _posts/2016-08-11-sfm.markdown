@@ -9,3 +9,75 @@ excerpt: An introduction to the essential matrix.
 <p align="center">
 	<img src="/matrix_transform.png"> 
 </p>
+
+In the next part in this series of articles about depth recontruction we will talk about the essential matrix. Before we define it we have to look back at another mathamatical idea.  
+
+**The Cross Product**
+
+<p align="center">
+	<img src="/cross-prod.png" height="300"> 
+</p>
+
+As many readers will know, the cross product takes two vectors and cretes a vector perpendicular to both of them. It is important to note that if the two vectors are not independent (that is if one vector is a scalar multiple of the other) then the cross product is the zero vector. What does the cross product actually look like?   
+
+<p align="center">
+	<img src="/cross-equation.gif" height="75"> 
+</p>
+
+Truthfully they're are better ways to think of the cross product but this one is useful because it allows us to see exactly what the end result of the cross product is. This brings us to the next concept. For any vector a, we can make a matrix C(a) such that for any vector b, a x b = C(a)b. 
+
+<p align="center">
+	<img src="/cross-matrix.gif" height="75"> 
+</p>
+
+So why is this useful? Well remember the equation from the end of the [last post](% post_url 2016-08-21-sfm2 %)?  
+
+<p align="center"> 
+	&lambda;<sub>1</sub>p<sub>1</sub> = &lambda;<sub>2</sub>Rp<sub>2</sub> + T
+</p>  
+
+  Well now what if we take C(T) and multiple by it on the right.  
+
+<p align="center"> 
+	&lambda;<sub>1</sub>C(T)p<sub>1</sub> = &lambda;<sub>2</sub>C(T)Rp<sub>2</sub> + C(T)T
+</p>  
+
+Notice that C(T)T is the zero vector because you are crossing T with itself.  
+
+<p align="center"> 
+	&lambda;<sub>1</sub>C(T)p<sub>1</sub> = &lambda;<sub>2</sub>C(T)Rp<sub>2</sub>
+</p> 
+
+Now we get a little more clever and multiply both sides on the right by p<sub>1</sub><sup>T</sup>.
+
+<p align="center"> 
+	&lambda;<sub>1</sub>p<sub>1</sub><sup>T</sup>C(T)p<sub>1</sub> = &lambda;<sub>2</sub>p<sub>1</sub><sup>T</sup>C(T)Rp<sub>2</sub>
+</p>  
+
+Now we know that p<sub>1</sub><sup>T</sup>C(T)p<sub>1</sub> = 0 because C(T)p<sub>1</sub> is perpendicular to p<sub>1</sub> and multiplication by p<sub>1</sub><sup>T</sup> is equivalent to a dot product. So our equation becomes:
+
+<p align="center"> 
+	0 = &lambda;<sub>2</sub>p<sub>1</sub><sup>T</sup>C(T)Rp<sub>2</sub>
+</p> 
+
+We can divide by &lambda;<sub>2</sub> to get:
+
+<p align="center"> 
+	0 = p<sub>1</sub><sup>T</sup>C(T)Rp<sub>2</sub>
+</p> 
+
+Finally we will define the essential matrix:
+
+<p align="center"> 
+	E := C(T)R
+</p> 
+
+We can rewrite the equation above in terms of this new definition.
+
+<p align="center"> 
+	0 = p<sub>1</sub><sup>T</sup>Ep<sub>2</sub>
+</p> 
+
+So why did we go through all this work just to get this new matrix? Well E provides a linear relation between p<sub>1</sub> and p<sub>2</sub>. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).  
+
+Is that it, is E just a meaningless intermediate step. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues). 

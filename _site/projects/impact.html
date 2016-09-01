@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Iris</title>
-  <meta name="description" content="A puzzle game about blending colors.">
+  <title>Impact</title>
+  <meta name="description" content="Determine when two polyheadra collide in space.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/projects/iris.html">
+  <link rel="canonical" href="http://yourdomain.com/projects/impact.html">
   <link rel="alternate" type="application/rss+xml" title="Peter Stefek" href="http://yourdomain.com/feed.xml">
 </head>
 
@@ -69,29 +69,28 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Iris</h1>
+    <h1 class="post-title" itemprop="name headline">Impact</h1>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Iris is a puzzle game that I built with Simon Ever-Hale, Sam Grund, and Jonah Bregstone. It started out as a project from a game design class. We are currently porting it to mobile and html5.</p>
-
-<p align="center">
-	<img src="/iris-screenshot.png" width="400" /> 
+    <p align="center">
+	<img src="/impact-screen.png" /> 
 </p>
 
-<p><strong>Gameplay</strong><br />
-The objective of the game is to reach the exit. Along the way you are blocked by colored blocks. By flipping switches you can change the background color to match the blocks that obstruct you and pass through them.</p>
+<p>The summer of my freshman year I had a simple idea about how to check if two polyhedra would collide in space. I pursed the idea, built the algorithm and dervied all the equations myself from simple mathamatical principles. After I was finished I saw that a similar idea had been used by Id Software however the their math was more complex and required knowlage of special coordinate systems.</p>
 
-<p align="center">
-	<img src="/iris.gif" width="400" /> 
-</p>
+<p><strong>Highlights</strong><br />
+Impact is simple. There are faster algorithms but they are usually concealed behind 20 page papers of advanced math. Impact is also continuous which means that objects can never step over each other if they are moving too fast.</p>
 
-<p><strong>Levels</strong><br />
-I designed a system to procedurally generate puzzles of different difficulties. This allowed us to easily create hundreds of levels.</p>
+<p><strong>Basic Idea</strong><br />
+The basic idea behind Impact is that if two polyhedra are going to collide then one of the following 3 things must happen:<br />
+1) one vertex from one of the polyhedron goes through the face of the other<br />
+2) one edge from one of the polyhedron goes through an edge of the other polyhedron<br />
+3) one vertex from one of the polyhedron goes through an edge of the other polyhedron<br />
+Now all we need to do from here is solve for each of these cases to check if two polyhedra collide. Of course solving those cases takes some thought but I found that they were easier to work with than the other methods I had looked at before.</p>
 
-<p><strong>Tools</strong><br />
-To build the prototype we used Unity and C#. The level generation script is in Python.</p>
-
+<p><strong>Demo</strong><br />
+You can check out the algorithm in action in <a href="https://mr4k.github.io/Impact/">this</a> demo and view the source on <a href="https://github.com/Mr4k/Impact">github</a>.</p>
 
   </div>
 
