@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Sep 2016 19:24:04 +0200</pubDate>
-    <lastBuildDate>Thu, 01 Sep 2016 19:24:04 +0200</lastBuildDate>
+    <pubDate>Fri, 09 Sep 2016 19:04:33 +0200</pubDate>
+    <lastBuildDate>Fri, 09 Sep 2016 19:04:33 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -84,9 +84,11 @@
 	0 = p&lt;sub&gt;1&lt;/sub&gt;&lt;sup&gt;T&lt;/sup&gt;Ep&lt;sub&gt;2&lt;/sub&gt;
 &lt;/p&gt;
 
-&lt;p&gt;So why did we go through all this work just to get this new matrix? Well E provides a linear relation between p&lt;sub&gt;1&lt;/sub&gt; and p&lt;sub&gt;2&lt;/sub&gt;. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).&lt;/p&gt;
+&lt;p&gt;So why did we go through all this work just to get this new matrix? Well most importantly E provides a linear relation between p&lt;sub&gt;1&lt;/sub&gt; and p&lt;sub&gt;2&lt;/sub&gt;. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).&lt;/p&gt;
 
-&lt;p&gt;Is that it, is E just a meaningless intermediate step. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Significance of the Essential Matrix&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Is E just a meaningless intermediate stepin our problem. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues).&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Aug 2016 14:01:00 +0200</pubDate>
         <link>http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/20/sfm.html</link>
@@ -205,7 +207,7 @@ I also used both L2 regularizarion and dropout so that I would have to worry les
 I used 200,000 games from &lt;a href=&quot;http://www.kingbase-chess.net/&quot;&gt;KingBase&lt;/a&gt;, a database of games between players ranked &amp;gt; 2000, to train the network. I took each board position and figured out the probability distributions over all the moves made from it during those games. Then I used that data to train the network for about 36 hours on my macbook (no gpu).&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Results&lt;/strong&gt;&lt;br /&gt;
-Before I write about these results I must make the disclaimer that my test set was a too small (only 61 board positions) so take them with a grain of salt. So the question is can it play chess? The answer is to an extent. Out of the 61 board positions, 56 of the networks top choices were legal moves. Not only were they legal, but some of them were recommended by hand tuned chess systems. Sometimes the network also made terrible moves. However these moves seemed to occur at the end of the game. I will post the code to build the data and train the network soon so anyone can try to replicate/analyze the results. I just need to clean it up a little first.&lt;/p&gt;
+Before I write about these results I must make the disclaimer that my test set was a too small (only 61 board positions) so take them with a grain of salt. So the question is can it play chess? The answer is to an extent. Out of the 61 board positions, 56 of the networks top choices were legal moves. Not only were they legal, but some of them were recommended by hand tuned chess systems. Sometimes the network also made terrible moves. However these moves seemed to occur at the end of the game.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Improvement&lt;/strong&gt;&lt;br /&gt;
 I will try to improve this system in a couple ways. First of all I will train it for longer on a gpu with more training data. I’m hoping this will help its early and middle game selections. Finally I will try to train the network using &lt;a href=&quot;http://www.scholarpedia.org/article/Policy_gradient_methods&quot;&gt;policy gradients&lt;/a&gt; or some similar method. This will allow the network to learn by palying itself and encounter a wider range of board positions that it does now. For example the network does not know how to play from a seriously disadvantaged position because pro games are usually pretty close.&lt;/p&gt;
@@ -356,12 +358,12 @@ This solution is only 80% accurate on the test set. That is a significant improv
 &lt;p&gt;In traditional math style, Alice and Bob are bored at home and decided to play chess. Because Alice is a chess prodigy, she destroys Bob five to nothing. To make him feel better, Alice challenges him to a new game called Trenchwaffle which heavily favors Bob. In Trenchwaffle each player can either dig a trench (branch right) or eat a waffle (branch left). There are only three turns in the whole game (Bob moves, then Alice moves, then Bob moves once more). Although the rules of Trenchwaffle are vague and mysterious we manage to procure a complete &lt;a href=&quot;https://en.wikipedia.org/wiki/Game_tree&quot;&gt;game tree&lt;/a&gt;. So the question is should Bob eat a waffle (branch left) or dig a trench (branch right)? The following diagram shows how to use the minimax algorithm to figure out which move Bob should make:&lt;/p&gt;
 
 &lt;p align=&quot;center&quot;&gt;
-	&lt;img src=&quot;/blog/trenchwaffle.png&quot; /&gt; 
+	&lt;img src=&quot;/trenchwaffle.png&quot; /&gt; 
 &lt;/p&gt;
 
-&lt;p&gt;According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Solved_game&quot;&gt;solvable&lt;/a&gt; minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn’t &lt;a href=&quot;https://en.wikipedia.org/wiki/Solving_chess&quot;&gt;chess solvable&lt;/a&gt;? The answer is that the game tree for chess is far too big to compute in full. The average &lt;a href=&quot;https://en.wikipedia.org/wiki/Branching_factor&quot;&gt;branching factor&lt;/a&gt; for chess is around 36. So the sixth layer of the game tree contains around 36&lt;sup&gt;6&lt;/sup&gt; moves. The tenth layer contains around 36&lt;sup&gt;10&lt;/sup&gt; moves.&lt;/p&gt;
+&lt;p&gt;According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is &lt;a href=&quot;https://en.wikipedia.org/wiki/Solved_game&quot;&gt;solvable&lt;/a&gt; minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn’t &lt;a href=&quot;https://en.wikipedia.org/wiki/Solving_chess&quot;&gt;chess solvable&lt;/a&gt;? The answer is that the game tree for chess is far too big to compute in full. The average &lt;a href=&quot;https://en.wikipedia.org/wiki/Branching_factor&quot;&gt;branching factor&lt;/a&gt; for chess is around 36. So the sixth layer of the game tree contains around 36&lt;sup&gt;6&lt;/sup&gt; moves. The tenth layer contains around 36&lt;sup&gt;10&lt;/sup&gt; moves.&lt;/p&gt;
 
-&lt;p&gt;To apply minimax to a game like chess there are too many moves to look at we only look a small number of moves ahead and then guess how good each leaf node of our game tree is. In my current implementation I look 5 half moves ahead and even then I still need to reduce the number of nodes searched using &lt;a href=&quot;https://www.youtube.com/watch?v=Ewh-rF7KSEg&quot;&gt;alpha beta pruning&lt;/a&gt;. So now we just need a way to determine how good a position is for a particular player. This is called the evaluation function.&lt;/p&gt;
+&lt;p&gt;To apply minimax to a game like chess where there are too many moves to look at we only look a small number of moves ahead and then guess how good each leaf node of our game tree is. In my current implementation I look 5 half moves ahead and even then I still need to reduce the number of nodes searched using &lt;a href=&quot;https://www.youtube.com/watch?v=Ewh-rF7KSEg&quot;&gt;alpha beta pruning&lt;/a&gt;. So now we just need a way to determine how good a position is for a particular player. This is called the evaluation function.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;The Evaluation Function&lt;/strong&gt;&lt;/p&gt;
 

@@ -78,6 +78,8 @@ We can rewrite the equation above in terms of this new definition.
 	0 = p<sub>1</sub><sup>T</sup>Ep<sub>2</sub>
 </p> 
 
-So why did we go through all this work just to get this new matrix? Well E provides a linear relation between p<sub>1</sub> and p<sub>2</sub>. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).  
+So why did we go through all this work just to get this new matrix? Well most importantly E provides a linear relation between p<sub>1</sub> and p<sub>2</sub>. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).  
 
-Is that it, is E just a meaningless intermediate step. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues). 
+**The Significance of the Essential Matrix**  
+
+Is E just a meaningless intermediate stepin our problem. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues). 

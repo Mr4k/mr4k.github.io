@@ -91,12 +91,12 @@
 <p>In traditional math style, Alice and Bob are bored at home and decided to play chess. Because Alice is a chess prodigy, she destroys Bob five to nothing. To make him feel better, Alice challenges him to a new game called Trenchwaffle which heavily favors Bob. In Trenchwaffle each player can either dig a trench (branch right) or eat a waffle (branch left). There are only three turns in the whole game (Bob moves, then Alice moves, then Bob moves once more). Although the rules of Trenchwaffle are vague and mysterious we manage to procure a complete <a href="https://en.wikipedia.org/wiki/Game_tree">game tree</a>. So the question is should Bob eat a waffle (branch left) or dig a trench (branch right)? The following diagram shows how to use the minimax algorithm to figure out which move Bob should make:</p>
 
 <p align="center">
-	<img src="/blog/trenchwaffle.png" /> 
+	<img src="/trenchwaffle.png" /> 
 </p>
 
-<p>According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is a <a href="https://en.wikipedia.org/wiki/Solved_game">solvable</a> minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn’t <a href="https://en.wikipedia.org/wiki/Solving_chess">chess solvable</a>? The answer is that the game tree for chess is far too big to compute in full. The average <a href="https://en.wikipedia.org/wiki/Branching_factor">branching factor</a> for chess is around 36. So the sixth layer of the game tree contains around 36<sup>6</sup> moves. The tenth layer contains around 36<sup>10</sup> moves.</p>
+<p>According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is <a href="https://en.wikipedia.org/wiki/Solved_game">solvable</a> minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn’t <a href="https://en.wikipedia.org/wiki/Solving_chess">chess solvable</a>? The answer is that the game tree for chess is far too big to compute in full. The average <a href="https://en.wikipedia.org/wiki/Branching_factor">branching factor</a> for chess is around 36. So the sixth layer of the game tree contains around 36<sup>6</sup> moves. The tenth layer contains around 36<sup>10</sup> moves.</p>
 
-<p>To apply minimax to a game like chess there are too many moves to look at we only look a small number of moves ahead and then guess how good each leaf node of our game tree is. In my current implementation I look 5 half moves ahead and even then I still need to reduce the number of nodes searched using <a href="https://www.youtube.com/watch?v=Ewh-rF7KSEg">alpha beta pruning</a>. So now we just need a way to determine how good a position is for a particular player. This is called the evaluation function.</p>
+<p>To apply minimax to a game like chess where there are too many moves to look at we only look a small number of moves ahead and then guess how good each leaf node of our game tree is. In my current implementation I look 5 half moves ahead and even then I still need to reduce the number of nodes searched using <a href="https://www.youtube.com/watch?v=Ewh-rF7KSEg">alpha beta pruning</a>. So now we just need a way to determine how good a position is for a particular player. This is called the evaluation function.</p>
 
 <p><strong>The Evaluation Function</strong></p>
 
@@ -170,7 +170,17 @@
 
 </footer> !-->
 
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-83611962-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
   </body>
 
 </html>

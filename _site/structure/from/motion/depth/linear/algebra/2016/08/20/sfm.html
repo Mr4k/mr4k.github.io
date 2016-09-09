@@ -146,9 +146,11 @@
 	0 = p<sub>1</sub><sup>T</sup>Ep<sub>2</sub>
 </p>
 
-<p>So why did we go through all this work just to get this new matrix? Well E provides a linear relation between p<sub>1</sub> and p<sub>2</sub>. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).</p>
+<p>So why did we go through all this work just to get this new matrix? Well most importantly E provides a linear relation between p<sub>1</sub> and p<sub>2</sub>. This means we can solve for E easily using a standard system of equations. So now all we need is a way to get R and T out of E and we can solve for the depth(coming in Part 3).</p>
 
-<p>Is that it, is E just a meaningless intermediate step. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues).</p>
+<p><strong>The Significance of the Essential Matrix</strong></p>
+
+<p>Is E just a meaningless intermediate stepin our problem. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues).</p>
 
   </div>
 
@@ -195,7 +197,17 @@
 
 </footer> !-->
 
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-83611962-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
   </body>
 
 </html>
