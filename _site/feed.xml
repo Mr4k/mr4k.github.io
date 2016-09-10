@@ -6,9 +6,60 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Sep 2016 19:04:33 +0200</pubDate>
-    <lastBuildDate>Fri, 09 Sep 2016 19:04:33 +0200</lastBuildDate>
+    <pubDate>Sat, 10 Sep 2016 03:09:56 +0200</pubDate>
+    <lastBuildDate>Sat, 10 Sep 2016 03:09:56 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Brain Pain</title>
+        <description>&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/riddle.jpg&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;This semester I am studying abroad at the &lt;a href=&quot;http://www.budapestsemesters.com/&quot;&gt;Budapest Semesters in Mathamatics&lt;/a&gt; program. This means that I am always surrounded by people who enjoy solving puzzles also known as mathmaticans. One of my roommates gave me this problem and I thought that it was worth sharing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Problem&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/rect-problem.png&quot; /&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;Using only a straight edge and a pencil construct a line which divides the shaded area in half. The straight edge has no markings so you cannot measure anything.&lt;/p&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;View the solution&lt;/summary&gt;
+  The key insight is that any line which passes through the center of a rectangle divides it in half. We can think of the area of the big rectangle as positive and the area of the little rectangle as negative. The area of the shaded region is the sum of the positive and negative areas. So if we can make a line which divides both rectangles in half we will have equal amounts of positive and negative area on both sides of the line.      
+
+  &lt;p&gt;First we construct the center of one of the rectangles. We can do this by finding the intersection of the diagonals.&lt;/p&gt;
+  &lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/rect-centers-1.png&quot; /&gt; 
+  &lt;/p&gt;  
+  Then we construct the center of the other rectangle.
+  &lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/rect-centers-2.png&quot; /&gt; 
+  &lt;/p&gt;  
+  Finally we constuct the dividing line so that it goes through both centers.
+  &lt;p align=&quot;center&quot;&gt;
+	&lt;img src=&quot;/rect-dividing-line.png&quot; /&gt; 
+  &lt;/p&gt;  
+  Note that this solution works for any orientation/position/scale of the rectangles.
+&lt;/details&gt;
+
+</description>
+        <pubDate>Fri, 09 Sep 2016 12:50:40 +0200</pubDate>
+        <link>http://yourdomain.com/brain/teaser/puzzle/construction/2016/09/09/brain-pain.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/brain/teaser/puzzle/construction/2016/09/09/brain-pain.html</guid>
+        
+        
+        <category>brain</category>
+        
+        <category>teaser</category>
+        
+        <category>puzzle</category>
+        
+        <category>construction</category>
+        
+      </item>
     
       <item>
         <title>Out of My Depth (Part 2)</title>
