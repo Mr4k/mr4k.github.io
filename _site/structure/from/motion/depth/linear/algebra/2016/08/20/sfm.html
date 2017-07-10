@@ -17,11 +17,86 @@
 
   <body>
 
-    <header class="site-header">
+    <link rel="stylesheet" href="overlay.css">
+<header class="site-header">
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">Peter Stefek</a>
+
+    <div>
+      <a style="display:block" href="/">
+        <div style = "position: absolute;" class="site-title">Peter Stefek</div>
+      </a>
+      <canvas id="myCanvas" width="150" height="60"></canvas>
+    </div>
+
+
+    <script>
+
+      window.requestAnimFrame = (function(callback) {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+            function(callback) {
+              window.setTimeout(callback, 1000 / 60);
+            };
+         })();
+
+
+      function choosePointOnBox(box) {
+        return [(box[2] - box[0]) * Math.random() + box[0], (box[3] - box[1]) * Math.random() + box[1]];
+      }
+
+      function distance(pt1, pt2) {
+        return Math.sqrt((pt1[0] - pt2[0]) * (pt1[0] - pt2[0]) + (pt1[1] - pt2[1]) * (pt1[1] - pt2[1]))
+      }
+
+      particles = []
+
+      var canvas = document.getElementById("myCanvas");
+      var context = canvas.getContext("2d");
+
+      box = [12, 12, 138, 48];
+      colors = ["#E05067", "#FA8A67", "#9E337E", "#511C7A", "#291559"];
+      for (var i = 0; i < 50; i++) {
+        pt = choosePointOnBox(box);
+        radius = Math.max((6 - distance(pt, [75, 30]) * 0.1), 0)
+        particles.push([pt, Math.random() * Math.PI, radius + 8, Math.random() * 0.002 + 0.002])
+      }
+
+      var render = function() {
+          // Clear the canvas
+          context.clearRect(0, 0, canvas.width, canvas.height);
+
+          var i = particles.length;
+          while (i--) {
+            pt = particles[i][0]
+            //console.log(pt)
+            currentRadius = particles[i][1]
+            maxRadius = particles[i][2]
+
+            particles[i][1] += particles[i][3]
+            //console.log(currentRadius);
+            if (particles[i][1] >= Math.PI) {
+              particles.splice(i, 1);
+              pt = choosePointOnBox(box);
+              radius = Math.max((6 - distance(pt, [75, 30]) * 0.1), 0)
+              particles.push([pt, 0, radius + 8, Math.random() * 0.002 + 0.002])
+            }
+
+            context.fillStyle = colors[Math.floor(((pt[0] - box[0]) / box[2]) * colors.length)];
+          context.beginPath();
+            context.arc(pt[0], pt[1], Math.sin(currentRadius) * maxRadius, 0, 2 * Math.PI);
+          context.fill();
+          }
+
+          // Redraw
+          requestAnimationFrame(render);
+      };
+
+      // Start the redrawing process
+      render();
+
+
+    </script>
 
     <!--<nav class="site-nav">
       <a href="#" class="menu-icon">
