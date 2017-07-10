@@ -1,4 +1,7 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans|Raleway";
+@import "https://fonts.googleapis.com/css?family=Roboto";
+@import "https://fonts.googleapis.com/css?family=Inconsolata";
+@import "https://fonts.googleapis.com/css?family=Quicksand";
 /**
  * Reset some basic elements
  */
@@ -15,7 +18,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 300 15px/1.5 "Raleway", sans-serif;
+  font: 100 15px/1.5 "Quicksand", sans-serif;
   color: #111;
   background-color: #fcfdfd;
   -webkit-text-size-adjust: 100%;
@@ -64,7 +67,7 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 300; }
+  font-weight: 100; }
 
 /**
  * Links
@@ -94,9 +97,11 @@ blockquote {
 pre,
 code {
   font-size: 15px;
-  border: 1px solid #e8e8e8;
-  border-radius: 3px;
-  background-color: #eef; }
+  font-family: "Inconsolata", monospace;
+  border-top: 1px dashed #888888;
+  border-bottom: 1px dashed #888888;
+  border-radius: 0px;
+  background-color: #fcfdfd; }
 
 code {
   padding: 1px 5px; }
@@ -282,7 +287,7 @@ pre {
   .post-list a {
     color: #111;
     text-decoration: none;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Raleway", sans-serif;
     font-weight: bold; }
     .post-list a:hover {
       color: #ADD8E6; }
@@ -339,11 +344,12 @@ pre {
 
 /**
  * Syntax highlighting styles
+ * NOTE TO CHANGE SOME PROPERTIES SUCH AS BLOCK BACKGROUD COLOR LOOK AT: _base.scss under the code formatting.
  */
 .highlight {
   background: #fff; }
   .highlighter-rouge .highlight {
-    background: #eef; }
+    background: #fcfdfd; }
   .highlight .c {
     color: #998;
     font-style: italic; }
