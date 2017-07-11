@@ -1,11 +1,11 @@
 ---
 layout: page
-title: About
+title: <b>About</b>
 permalink: /about/
 embed : 1
 ---
 
-I am a third year at Oberlin College. I am majoring in math and computer science. I also enjoy rock climbing. Please feel free to <a href="mailto:pstefek@oberlin.edu">Email</a> me or check out my <a href="https://github.com/Mr4k">Github</a>.
+Rising senior at Oberlin College majoring in math and computer science. Currently interning at <a href = "https://amazon.com">Amazon</a> working on personalization. I also enjoy rock climbing. Please feel free to <a href="mailto:pstefek@oberlin.edu">email</a> me or check out my <a href="https://github.com/Mr4k">github</a>. Views are my own.
 
 
 

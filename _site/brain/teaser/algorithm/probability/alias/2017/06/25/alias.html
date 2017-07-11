@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Do I Feel Lucky?</title>
-  <meta name="description" content="Well do you punk?">
+  <meta name="description" content="Constant time draws from a discrete distribution.">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://yourdomain.com/brain/teaser/algorithm/probability/alias/2017/06/25/alias.html">
@@ -110,7 +110,7 @@
       <!--<div class="trigger">
         
           
-          <a class="page-link" href="/about/">About</a>
+          <a class="page-link" href="/about/"><b>About</b></a>
           
         
           
@@ -170,7 +170,7 @@ thick.thicker {
 <span class="k">def</span> <span class="nf">weightedRandom</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
 	<span class="s">"""
 	Draw from a general discrete distribution.
-	:param weights: A dictionary of weights (must all sum to one)
+	:param weights: A dictionary of weights which sum to one.
 	:return: A random sample from it the distribution defined by the weights.
 	"""</span>
 
@@ -195,7 +195,7 @@ thick.thicker {
 <strong>So can we do better?</strong> The answer is sort of. It depends on what we want to do. It turns out if we want to sample from the same distribution multiple times, then we can. We will do just one preprocessing step (which will be the same time/space complexity for any set of n weights) and after that each sample will be O(1). So the more times we want to sample from the same distribution, the better the performance will be.<br />
 <br />
 <strong>How does this work?</strong>
-I’m going to go over the preprocessing step in a later section but first I’m going to describe how we do the O(1) lookups. Consider a general discrete probability distribution with n weights. We are going to divide it up into n boxes such that each box will contain pieces of either one or two different different weights and the pieces of these weights will sum to 1/n. From our definition the sum of all the pieces of all the weights in the boxes is 1 (the size of the entire distribution)<br />
+I’m going to go over the preprocessing step in a later section but first I’m going to describe how we do the O(1) lookups. Consider a general discrete probability distribution with n weights. We are going to divide it up into n boxes such that each box will contain pieces of either one or two different different weights and the pieces of these weights will sum to 1/n. From our definition the sum of all the pieces of all the weights in the boxes is 1 (the size of the entire distribution).<br />
 <br />
 <strong>The description can be difficult.</strong> I think a picture can really help. In this example we have three colored balls with weights p(blue) = 1/6, p(orange) = 3/6, p(green) = 2/6:</p>
 <p align="center">
@@ -238,9 +238,10 @@ Here’s a visualization of the algorithm:</p>
 <span class="k">def</span> <span class="nf">partitionWeights</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
 	<span class="s">"""
 	The preprocessing step.
-	:param weights: A dictionary of weights
+	:param weights: A dictionary of weights which sum to one.
 	:return: A partition used to draw quickly from the distribution
 	"""</span>
+	<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.00001</span> <span class="c"># for floating point precision issues</span>
 	<span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
 	<span class="n">numWeights</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 	<span class="c"># We use a AVLTree to make our pull/push operations O(log n)</span>
@@ -248,10 +249,10 @@ Here’s a visualization of the algorithm:</p>
 	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">numWeights</span><span class="p">):</span>
 		<span class="n">smallestValue</span><span class="p">,</span> <span class="n">smallestColor</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">pop_min</span><span class="p">()</span> <span class="c"># O(log n)</span>
 		<span class="n">overfill</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">numWeights</span> <span class="o">-</span> <span class="n">smallestValue</span>
-		<span class="k">if</span> <span class="n">overfill</span> <span class="o">&gt;</span> <span class="mf">0.00001</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">overfill</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">:</span>
 			<span class="n">largestValue</span><span class="p">,</span> <span class="n">largestColor</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">pop_max</span><span class="p">()</span> <span class="c"># O(log n)</span>
 			<span class="n">largestValue</span> <span class="o">-=</span> <span class="n">overfill</span>
-			<span class="k">if</span> <span class="n">largestValue</span> <span class="o">&gt;</span> <span class="mf">0.00001</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">largestValue</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">:</span>
 				<span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">largestValue</span><span class="p">,</span> <span class="n">largestColor</span><span class="p">)</span> <span class="c"># O(log n)</span>
 			<span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">smallestValue</span><span class="p">,</span> <span class="n">smallestColor</span><span class="p">,</span> <span class="n">largestColor</span><span class="p">))</span>
 		<span class="k">else</span><span class="p">:</span>

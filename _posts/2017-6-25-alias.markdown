@@ -3,7 +3,7 @@ layout: post
 title:  "Do I Feel Lucky?"
 date:   2017-06-25 3:00:40 -0800
 categories: brain teaser algorithm probability alias
-excerpt: Well do you punk?
+excerpt: Constant time draws from a discrete distribution.
 ---
 
 <style>
@@ -25,7 +25,7 @@ import random
 def weightedRandom(weights):
 	"""
 	Draw from a general discrete distribution.
-	:param weights: A dictionary of weights (must all sum to one)
+	:param weights: A dictionary of weights which sum to one.
 	:return: A random sample from it the distribution defined by the weights.
 	"""
 
@@ -50,7 +50,7 @@ print counts
 **So can we do better?** The answer is sort of. It depends on what we want to do. It turns out if we want to sample from the same distribution multiple times, then we can. We will do just one preprocessing step (which will be the same time/space complexity for any set of n weights) and after that each sample will be O(1). So the more times we want to sample from the same distribution, the better the performance will be.  
 <br>
 **How does this work?**
-I'm going to go over the preprocessing step in a later section but first I'm going to describe how we do the O(1) lookups. Consider a general discrete probability distribution with n weights. We are going to divide it up into n boxes such that each box will contain pieces of either one or two different different weights and the pieces of these weights will sum to 1/n. From our definition the sum of all the pieces of all the weights in the boxes is 1 (the size of the entire distribution)  
+I'm going to go over the preprocessing step in a later section but first I'm going to describe how we do the O(1) lookups. Consider a general discrete probability distribution with n weights. We are going to divide it up into n boxes such that each box will contain pieces of either one or two different different weights and the pieces of these weights will sum to 1/n. From our definition the sum of all the pieces of all the weights in the boxes is 1 (the size of the entire distribution).  
 <br>
 **The description can be difficult.** I think a picture can really help. In this example we have three colored balls with weights p(blue) = 1/6, p(orange) = 3/6, p(green) = 2/6:
 <p align="center">
@@ -93,9 +93,10 @@ import random
 def partitionWeights(weights):
 	"""
 	The preprocessing step.
-	:param weights: A dictionary of weights
+	:param weights: A dictionary of weights which sum to one.
 	:return: A partition used to draw quickly from the distribution
 	"""
+	epsilon = 0.00001 # for floating point precision issues
 	boxes = []
 	numWeights = len(weights)
 	# We use a AVLTree to make our pull/push operations O(log n)
@@ -103,10 +104,10 @@ def partitionWeights(weights):
 	for i in xrange(numWeights):
 		smallestValue, smallestColor = tree.pop_min() # O(log n)
 		overfill = 1.0 / numWeights - smallestValue
-		if overfill > 0.00001:
+		if overfill > epsilon:
 			largestValue, largestColor = tree.pop_max() # O(log n)
 			largestValue -= overfill
-			if largestValue > 0.00001:
+			if largestValue > epsilon:
 				tree.insert(largestValue, largestColor) # O(log n)
 			boxes.append((smallestValue, smallestColor, largestColor))
 		else:
