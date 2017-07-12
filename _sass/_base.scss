@@ -100,6 +100,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
     color: $text-color;
     text-decoration: underline;
+    line-height: 1.2em;
 
     &:hover {
         color: #ADD8E6;
