@@ -9,7 +9,7 @@ project: 4
 	<img src="/lightbox.png"> 
 </p>
 
-**Lightbox is a basic extendable raytracer I wrote with python.** Most of the work was done over two days. You can check it out here on my [github](https://github.com/Mr4k/lightbox).  
+**Lightbox is a basic extendable raytracer I wrote with python.** Most of the work was done over two days. If you are interested feel free to check it out on my [github](https://github.com/Mr4k/lightbox).  
 <br>
 **Structure Lightbox breaks down everything into components as follows**:  
 <br>
