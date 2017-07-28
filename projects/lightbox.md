@@ -41,7 +41,7 @@ Refraction Index - Used to determine how light will bend when it passes through 
 Sample Texture - This is a function that determines texture at a specific point on (or inside) an object  
 <br>
 **Extensibilty**
-Lightbox was built to be extensible. The texture functions as well as the renderable class allow you to easily add new objects and materials to the scenes.Furthermore the underlying ray tracing code can also be rewritten without having to change how the objects work. The seperation of components leads lightbox to be easily changed.  
+Lightbox was built to be extensible. The texture functions as well as the renderable class allow you to easily add new objects and materials to the scenes. Furthermore the underlying ray tracing code can also be rewritten without having to change how the objects work. The seperation of components leads lightbox to be easily changed.  
 <br>
 
 **What's next?**
