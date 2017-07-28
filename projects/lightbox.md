@@ -11,7 +11,7 @@ project: 4
 
 **Lightbox is a basic extendable raytracer I wrote with python.** Most of the work was done over two days. If you are interested feel free to check it out on my [github](https://github.com/Mr4k/lightbox).  
 <br>
-**Structure Lightbox breaks down everything into components as follows**:  
+**Structure** - Lightbox breaks down everything into components as follows:  
 <br>
 **Renderables** - 3D geometry like a sphere, or a plane, or a box. You can easily extend this component by providing your own ray to surface intersection function.  
 Here is a Renderable which represents a horizontal plane:
