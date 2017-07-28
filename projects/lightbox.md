@@ -1,7 +1,7 @@
 ---
 layout: project
 title:  "Lightbox"
-excerpt: A quick raytracer in python
+excerpt: A quick raytracer in python.
 project: 4
 ---
 
