@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>The Count of Monte Carlo</title>
-  <meta name="description" content="An explantation of the minimax algorithm and its applications to chess.">
+  <title>Lightbox</title>
+  <meta name="description" content="A quick raytracer in python.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html">
+  <link rel="canonical" href="http://yourdomain.com/projects/lightbox.html">
   <link rel="alternate" type="application/rss+xml" title="Peter Stefek" href="http://yourdomain.com/feed.xml">
 </head>
 
@@ -150,60 +150,48 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">The Count of Monte Carlo</h1>
-    <p class="post-meta"><time datetime="2016-06-28T13:30:40-07:00" itemprop="datePublished">Jun 28, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">Lightbox</h1>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <p align="center">
-	<img src="/tree_comic.png" /> 
+	<img src="/lightbox.png" /> 
 </p>
 
-<p>A couple days ago started building a small chess engine. This weekend I decided to give it a web interface. I ended up using <a href="http://flask.pocoo.org/">Flask</a> for the backend because I like python. You can play a slighly less intelligent version (due to memory constraints on server) <a href="http://playchess-pstefek.rhcloud.com/">here</a>. You can also view the source code on <a href="https://github.com/Mr4k/playchess">github</a> but be warned, I have not cleaned it up yet. Although I have a working application I’m far from done. The algorithm does not play very well right now. The moves it generates make some sense but it usually slips up if you pressure it.</p>
+<p><strong>Lightbox is a basic extendable raytracer I wrote with python.</strong> Most of the work was done over two days. You can check it out here on my <a href="https://github.com/Mr4k/lightbox">github</a>.<br />
+<br />
+<strong>Structure Lightbox breaks down everything into components as follows</strong>:<br />
+<br />
+<strong>Renderables</strong> - 3D geometry like a sphere, or a plane, or a box. You can easily extend this component by providing your own ray to surface intersection function.<br />
+Here is a Renderable which represents a horizontal plane:</p>
 
-<p><strong>The Current Algorithm</strong></p>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Plane</span><span class="p">(</span><span class="n">Geom</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
 
-<p>The current algorithm I am using is pretty simple. There are two main components, search and evaluation.</p>
+	<span class="k">def</span> <span class="nf">hitsRay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ray</span><span class="p">,</span> <span class="n">cameraPos</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+		<span class="n">intersectionNormal</span> <span class="o">=</span> <span class="bp">None</span>
+		<span class="k">if</span> <span class="n">ray</span><span class="o">.</span><span class="n">dot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">intersectionDepth</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">intersectionDepth</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">cameraPos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">ray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+			<span class="n">intersectionNormal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+		<span class="k">return</span> <span class="p">(</span><span class="n">intersectionDepth</span><span class="p">,</span> <span class="n">intersectionNormal</span><span class="p">)</span></code></pre></figure>
 
-<p><strong>The Search Algorithm</strong></p>
+<p><br />
+<strong>Materials</strong> - Materials are assigned to renderables. They control how an object looks. They have the following properties:<br />
+Color - The color of the material<br />
+Surface Specularity - How reflective or “shiny” the material is<br />
+Transparency - How transparent the material is<br />
+Refraction Index - Used to determine how light will bend when it passes through a transparent object.<br />
+Sample Texture - This is a function that determines texture at a specific point on (or inside) an object<br />
+<br />
+<strong>Extensibilty</strong>
+Lightbox was built to be extensible. The texture functions as well as the renderable class allow you to easily add new objects and materials to the scenes.Furthermore the underlying ray tracing code can also be rewritten without having to change how the objects work. The seperation of components leads lightbox to be easily changed.<br />
+<br /></p>
 
-<p>Right now I am using a search algorithm called minimax along with a technique called alpha beta pruning. The basic principle behind 2 player minimax is that the best move is the one which minimizes your opponent’s potential gain. Before we look at how this applies to chess let’s look at a very simple example.</p>
-
-<p>In traditional math style, Alice and Bob are bored at home and decided to play chess. Because Alice is a chess prodigy, she destroys Bob five to nothing. To make him feel better, Alice challenges him to a new game called Trenchwaffle which heavily favors Bob. In Trenchwaffle each player can either dig a trench (branch right) or eat a waffle (branch left). There are only three turns in the whole game (Bob moves, then Alice moves, then Bob moves once more). Although the rules of Trenchwaffle are vague and mysterious we manage to procure a complete <a href="https://en.wikipedia.org/wiki/Game_tree">game tree</a>. So the question is should Bob eat a waffle (branch left) or dig a trench (branch right)? The following diagram shows how to use the minimax algorithm to figure out which move Bob should make:</p>
-
-<p align="center">
-	<img src="/trenchwaffle.png" /> 
-</p>
-
-<p>According to minimax, Bob should eat a waffle (branch left) because he will always win no matter what Alice chooses to do. Because Trenchwaffle is <a href="https://en.wikipedia.org/wiki/Solved_game">solvable</a> minimax will find a winning strategy for Bob if one exists. So why does this not work with chess, isn’t <a href="https://en.wikipedia.org/wiki/Solving_chess">chess solvable</a>? The answer is that the game tree for chess is far too big to compute in full. The average <a href="https://en.wikipedia.org/wiki/Branching_factor">branching factor</a> for chess is around 36. So the sixth layer of the game tree contains around 36<sup>6</sup> moves. The tenth layer contains around 36<sup>10</sup> moves.</p>
-
-<p>To apply minimax to a game like chess where there are too many moves to look at we only look a small number of moves ahead and then guess how good each leaf node of our game tree is. In my current implementation I look 5 half moves ahead and even then I still need to reduce the number of nodes searched using <a href="https://www.youtube.com/watch?v=Ewh-rF7KSEg">alpha beta pruning</a>. So now we just need a way to determine how good a position is for a particular player. This is called the evaluation function.</p>
-
-<p><strong>The Evaluation Function</strong></p>
-
-<p>The evaluation function takes a game state as a parameter and returns a number which represents how good that state is for one of the two players. My evaluation function takes a chess board and returns how good it thinks black is doing (larger is better).</p>
-
-<p>The current evalution function I am using looks like this:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>function evaluate(board)
-  return (total value of pieces black captured) - (total value of pieces white captured)
-   + 0.1 * (total value of pieces black is attacking) + 0.1 * (total value of pieces black is defending)
-</code></pre>
-</div>
-
-<p>It’s defintely not great and I am sure someone who was good at chess could write me a better one. However I have some other ideas to improve the evaluation function.</p>
-
-<p><strong>The Future</strong></p>
-
-<p>While I think I will hold onto the search and evaluate model, I think there are a number of ways to improve both components.</p>
-
-<p><strong>Improving Search</strong></p>
-
-<p>The draw back to minimax in any form is that it is slow. By that I mean it takes about 2 minutes to search 5 half moves ahead even with alpha beta pruning. This also means it can’t look super far ahead to set up any mind blowing traps. There are several options I have to improve the search. 1. Figure out how to better prune the branches. One way to do this might be to put nodes through an evaluation function to see if they are worth exploring. 2. Use a different algorithm. The Monte Carlo Search Tree Algorithm (for which this post is named) looks promising.</p>
-
-<p><strong>Improving the evaluation function</strong></p>
-
-<p>This is where I might try machine learning. Chess is a nuanced game. A well placed knight could be worth losing a rook maybe even a queen but it’s usually not. I’m hoping that thousands of previous chess games describe these situations better than I can.</p>
+<p><strong>What’s next?</strong>
+Lightbox was supposed to be a short project (more like a toy) but some possible extensions could be to make it faster, potentially real time by parallelizing it and offloading the ray tracing to the gpu using something like CUDA.</p>
 
 
   </div>
