@@ -1,7 +1,7 @@
 ---
 layout: project
 title:  "Impact"
-excerpt: Determine when two polyheadra collide in space.
+excerpt: Determine when two polyheadra collide.
 project: 1
 ---
 
