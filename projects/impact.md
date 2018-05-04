@@ -9,10 +9,10 @@ project: 1
 	<img src="/impact-screen.png"> 
 </p>
 
-The summer of my freshman year I had a simple idea about how to check if two polyhedra would collide in space. I pursed the idea, built the algorithm and derived all the equations myself from simple mathematical principles. After I was finished I saw that a similar idea had been used by Id Software however the their math was more complex and required knowledge of special coordinate systems. 
+A simple algorithm which checks to see when two polydera will collide.
 
 **Highlights**  
-Impact is simple. There are faster algorithms but they are usually concealed behind 20 page papers of advanced math. Impact is also continuous which means that objects can never step over each other if they are moving too fast.  
+Impact is simple. There are faster algorithms but they are usually concealed behind advanced math. Impact is also continuous which means that objects can never step over each other if they are moving too fast.  
 
 **Basic Idea**  
 The basic idea behind Impact is that if two polyhedra are going to collide then one of the following 3 things must happen:  
