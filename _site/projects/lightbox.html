@@ -10,8 +10,22 @@
   <meta name="description" content="A quick raytracer in python.">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/projects/lightbox.html">
-  <link rel="alternate" type="application/rss+xml" title="Peter Stefek" href="http://yourdomain.com/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/projects/lightbox.html">
+  <link rel="alternate" type="application/rss+xml" title="Peter Stefek" href="http://localhost:4000/feed.xml">
+
+
+   <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "none" } } }); </script>
+       <script type="text/x-mathjax-config">
+         MathJax.Hub.Config({
+           tex2jax: {
+             inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+             processEscapes: true
+           }
+         });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+       
+
 </head>
 
 
@@ -158,9 +172,9 @@
 	<img src="/lightbox.png" /> 
 </p>
 
-<p><strong>Lightbox is a basic extendable raytracer I wrote with python.</strong> Most of the work was done over two days. You can check it out here on my <a href="https://github.com/Mr4k/lightbox">github</a>.<br />
+<p><strong>Lightbox is a basic extendable raytracer I wrote with python.</strong> Most of the work was done over two days. If you are interested feel free to check it out on my <a href="https://github.com/Mr4k/lightbox">github</a>.<br />
 <br />
-<strong>Structure Lightbox breaks down everything into components as follows</strong>:<br />
+<strong>Structure</strong> - Lightbox breaks down everything into components as follows:<br />
 <br />
 <strong>Renderables</strong> - 3D geometry like a sphere, or a plane, or a box. You can easily extend this component by providing your own ray to surface intersection function.<br />
 Here is a Renderable which represents a horizontal plane:</p>
@@ -187,7 +201,7 @@ Refraction Index - Used to determine how light will bend when it passes through 
 Sample Texture - This is a function that determines texture at a specific point on (or inside) an object<br />
 <br />
 <strong>Extensibilty</strong>
-Lightbox was built to be extensible. The texture functions as well as the renderable class allow you to easily add new objects and materials to the scenes.Furthermore the underlying ray tracing code can also be rewritten without having to change how the objects work. The seperation of components leads lightbox to be easily changed.<br />
+Lightbox was built to be extensible. The texture functions as well as the renderable class allow you to easily add new objects and materials to the scenes. Furthermore the underlying ray tracing code can also be rewritten without having to change how the objects work. The seperation of components leads lightbox to be easily changed.<br />
 <br /></p>
 
 <p><strong>What’s next?</strong>

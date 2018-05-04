@@ -16,6 +16,23 @@ dl, dd, ol, ul, figure {
     
 }
 
+/**
+* Summary / Details Tag Styling
+*/
+details summary::-webkit-details-marker {
+  display: none;
+}
+summary {
+    display: inline;
+    text-decoration: underline;
+    color:$grey-color;
+
+}
+summary:hover { 
+    background-color: yellow;
+    cursor: pointer;
+}
+
 
 /**
  * Basic styling

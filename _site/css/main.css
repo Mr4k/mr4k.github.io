@@ -15,6 +15,21 @@ dl, dd, ol, ul, figure {
 * Rainbow block style
 */
 /**
+* Summary / Details Tag Styling
+*/
+details summary::-webkit-details-marker {
+  display: none; }
+
+summary {
+  display: inline;
+  text-decoration: underline;
+  color: #828282; }
+
+summary:hover {
+  background-color: yellow;
+  cursor: pointer; }
+
+/**
  * Basic styling
  */
 body {
