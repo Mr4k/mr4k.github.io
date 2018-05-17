@@ -6,81 +6,9 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 May 2018 19:04:26 -0400</pubDate>
-    <lastBuildDate>Thu, 17 May 2018 19:04:26 -0400</lastBuildDate>
+    <pubDate>Thu, 17 May 2018 19:17:32 -0400</pubDate>
+    <lastBuildDate>Thu, 17 May 2018 19:17:32 -0400</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
-    
-      <item>
-        <title>The Best You Ever Had</title>
-        <description>&lt;p&gt;Pretend for a minute that you are a recruiter whose looking for people to fill a position. Maybe you’re reading this post because I have applied for a position at your company and you’re vetting me or something. Anyways the point is I’m one candidate among many. Even if you interview me and like me how do you know there’s not someone better out there to fill the position? &lt;br /&gt;&lt;br /&gt;
-More formally, you are going to interview $N$ candidates for a job. The order they come is random with all orderings will be equally likely. After each interview with a candidate you will come up with a quality score (a real number between 0 and 1) for them and then have to choose whether to hire them on the spot or reject them and hope a better fit comes along. Your goal is to hire the best of the best (the candidate who has the highest score among all N candidates) but you have no idea what the job market looks like (no information about the distribution from which these candidates are drawn). What is the probability that you succeed in your task given that you use the optimal hiring strategy &lt;br /&gt;&lt;br /&gt;
-This problem is know sometimes as the best choice problem or the secretary problem. It is a very famous and well studied problem even outside of math because of its very surprising solution, &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $\lim_{N \to \infty}Pr(\mbox{best is selected out of N candidates}) \to \frac{1}{e}$ &lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;
-This is a really cool result for several reasons. First of all it’s not even clear that there should be any kind of one fits all strategy. Secondly $\frac{1}{e} = 0.367879…$ which seems absurdly high. If have a million candidates you have around a one third chance of choosing &lt;strong&gt;the&lt;/strong&gt; very best one. The strategy is also fairly simple and seemingly bizarre&lt;br /&gt;&lt;br /&gt;
-&lt;strong&gt;Strategy:&lt;/strong&gt; For every N there is an $r_N^* $ such that the following strategy is optimal. Reject the first $r_N^* - 1$ candidates then choose the next candidate who is better all of then them. &lt;br /&gt;&lt;br /&gt;
-This type of strategy is called a cutoff rule. The final surprising fact is that &lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$\lim_{N \to \infty} r_N^* \to \frac{1}{e}$$ &lt;/div&gt;
-&lt;p&gt;This means that you see less than half of the many candidates while making your decision. &lt;br /&gt;&lt;br /&gt;
-&lt;strong&gt;Analysis&lt;/strong&gt;&lt;br /&gt;
-Analyzing the cutoff rule approach to this problem is actually fairly straight forward. Consider the cutoff rule with a variable $r$ which defines the cutoff point. The probability of finding the max can be though as follows, &lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$P(\mbox{success}) = \sum_{i=1}^N P(\mbox{applicant i is selected} \cap \mbox{applicant i is the best})$$ &lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$P(\mbox{success}) = \sum_{i=1}^N P(\mbox{applicant i is selected} \vert \mbox{applicant i is the best}) \times P(\mbox{applicant i is the best})$$ &lt;/div&gt;
-&lt;p&gt;The probability of any applicant being the best if $\frac{1}{n}$ because our candidates are equally likely to appear in any order. So&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$P(\mbox{success}) = \sum_{i=1}^N(\mbox{applicant i is selected} \vert \mbox{applicant i is the best}) \times \frac{1}{n}$$ &lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;
-[Continue explaining basic secretary problem]
-&lt;br /&gt;&lt;br /&gt;
-So in the case where we know nothing about the distribution, the cutoff rule is optimal. What about if we do know something? This time we know our distribution is uniform on $[0,1]$. Now let’s try to come up with an optimal strategy for this version. After each interview we have to accept or reject the candidate we just interviewed (let’s call this candidate the ith one). To gain some insight we can take a look at the following statement, &lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{best candidate was in past}) + P(\mbox{candidate i is best}) + P(\mbox{best candidate is in future}) = 1$$&lt;/div&gt;
-&lt;p&gt;Now we don’t have control over the past but we do have the choice between taking i and rejecting i. Therefore we pick choose the option between those two which has the highest probability of giving us the best candidate. Let’s make a few observations about these probabilities. &lt;br /&gt;&lt;br /&gt;
-For example that if candidate i’s score is less than any of the previous candidates we know that:&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{candidate i is best}) = 0$$&lt;/div&gt;
-&lt;p&gt;In this case we would always choose to move on because no matter what our chance is greater than or equal to 0 so we can’t do any worse and we might do better. &lt;br /&gt;&lt;br /&gt;
-Now what if candidate i is better than all the other candidates we’ve seen so far? Off the bat we know that, &lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{best candidate was in past}) = 0$$&lt;/div&gt;
-&lt;p&gt;This means that,&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{candidate i is best}) + P(\mbox{best candidate is in future}) = 1$$&lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{best candidate is in future}) = 1 - P(\mbox{candidate i is best})$$&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;
-Let $q_i$ denote candidate i’s quality score. That we want now is to know the probability that we will not find a better candidate in our last $N-i$ interviews. Since our candidate scores are drawn from a uniform distribution on $[0,1]$,&lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$ P(\mbox{candidate j's score } \leq q_i) = q_i, \forall j $$ &lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$ P(\mbox{last N-i candidates are all } \leq q_i) = \prod_{j = i+1}^{N}P(\mbox{candidate j's score } \leq q_i) = q_i^{N-i} $$ &lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$ P(\mbox{best candidate in future}) = 1 - P(\mbox{last N-i candidates are all } \leq q_i) = 1 - q_i^{N-i} $$ &lt;/div&gt;
-&lt;p&gt;So when is it optimal to choose to accept candidate i? It is when,&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{candidate i is best}) \geq P(\mbox{best candidate is in future})$$&lt;/div&gt;
-&lt;p&gt;Equivalently this when,&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$P(\mbox{best candidate is in future}) \leq \frac{1}{2}$$&lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$1 - q_i^{N-i} \leq \frac{1}{2}$$&lt;/div&gt;
-&lt;p&gt;Using this information we can solve for the threshold $q^*_i$ such that if $q_i \geq q^*_i$ our best option is to choose candidate i.&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$1 - {q^*_i}^{N-i} = \frac{1}{2}$$&lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$${q^*_i}^{N-i} = \frac{1}{2}$$&lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$${q^*_i}^{N-i} = \frac{1}{2}$$&lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt;$$q^*_i = \frac{1}{2}^\frac{1}{N-i}$$&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;So now we want to calculate the total probability of success under this new optimal strategy &lt;br /&gt;
-Following a similar idea from our analysis of the more general optimal stopping problem we can say, &lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$P(\mbox{we find the max}) = \sum_{i=1}^{N} P(\mbox{we select the max during interview i})$$ &lt;/div&gt;
-&lt;p&gt;Notice that this sum is okay because all of these events are mutually exclusive. &lt;br /&gt;&lt;/p&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$P(\mbox{we find the max}) = \big(\sum_{i=1}^{N-1} P(\mbox{candidate i is selected} \cap \mbox{candidate i is max})\big) + P(we succeed at interview n)$$ &lt;/div&gt;
-&lt;div style=&quot;text-align:center;&quot;&gt; $$P(\mbox{we find the max}) = \sum_{i=1}^N P(\mbox{candidate i is selected} \cap \mbox{candidate i is max})$$ &lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 06 May 2018 06:50:40 -0400</pubDate>
-        <link>http://localhost:4000/probability/choice/decision/2018/05/06/stopping.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/choice/decision/2018/05/06/stopping.html</guid>
-        
-        
-        <category>probability</category>
-        
-        <category>choice</category>
-        
-        <category>decision</category>
-        
-      </item>
     
       <item>
         <title>The PCP Theorem and Hardness of Approximation</title>
