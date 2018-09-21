@@ -165,12 +165,12 @@
 
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">The PCP Theorem and Hardness of Approximation</h1>
-    <p class="post-meta"><time datetime="2018-04-29T06:50:40-04:00" itemprop="datePublished">Apr 29, 2018</time></p>
+    <p class="post-meta"><time datetime="2018-04-29T03:50:40-07:00" itemprop="datePublished">Apr 29, 2018</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
     <p><strong>Preamble</strong><br />
-First of all a disclaimer. I researched topics related to the PCP Theorem for two weeks to write this post as part of my advanced algorithms class. I do not claim to know close to everything about this subject. If you are an expert and you see something that is wrong or misguided please email me. <br /><br /> Second of all, this post has more prerequisites than most of the other posts on this blog. I don’t necessarily like this so I am going to quickly list out some frequently used terms and concepts that a reader should be familiar with before continuing. <br /><br /></p>
+This post has more prerequisites than most of the other posts on this blog. I don’t necessarily like this so I am going to quickly list out some frequently used terms and concepts that a reader should be familiar with before continuing. <br /><br /></p>
 
 <ul>
   <li>
@@ -393,28 +393,27 @@ The verifier takes both answers and the original questions $v(x,y,a_1,a_2)$ and 
 The goal of both players is to maximize $\omega(G)$ to be the optimal win probability for the game G. <br /><br />
 Also it is important that the two players cannot communicate during the game. <br /></p>
 
-<p>You might be thinking, what kind of stupid game is this? Why don’t computer scientists at least play something cool like Fort Night?
+<p>You might be thinking, what kind of stupid game is this? Why don’t computer scientists at least play something cool like fortnite?
 Well here’s something kind of cool. We can formulate many problems as 2 Prover 1 Round Games. Let’s give an example using good old 3SAT. <br /><br /></p>
 
 <p>Given a set of clauses $x$ in 3CNF form, consider the following 2P1R game: <br />
 Let $X$ be the set of all clauses in $x$. <br />
 Let $Y$ be the set of all variables in $x$. <br />
 Let $\lambda$ be such the variable we draw from $Y$ will be in the clause drawn from $X$ (it will be one of the three of them with uniform probability). <br />
-Our first prover will return an assignment $\alpha$ of variables satisfying the clause $c_j$ it was given. The second prover will return an assignment $\beta$ of $x_i$ the variable it was given. The verifier will return true if and only if $\beta$ matches the assignment given to the same variable in $\alpha$. <br /><br />
-Observation 1: If $x$ is fully satisfiable then both players just pick according to the satisfying assignment. In some cases there may be more than one satisfying assignment in which case both players can agree some sort of ordering scheme beforehand and pick the first one. <br /><br /></p>
-<p style="display:inline;">Observation 2: If no satisfying assignment exists then every assignment fails to satisfy a certain factor of the clauses (let's call it $p$). Then the probability of failure will be at least $\frac{p}{3}$. 
-
+Our first prover will return an assignment $\alpha$ of variables satisfying the clause $c_j$ it was given. The second prover will return an assignment $\beta$ of $x_i$ the variable it was given. The verifier will return true if and only if $\beta$ matches the assignment given to the same variable in $\alpha$. <br /><br /> 
+Observation 1: If $x$ is fully satisfiable then both players just pick according to the satisfying assignment. In some cases there may be more than one satisfying assignment in which case both players can agree some sort of ordering scheme beforehand and pick the first one. <br /><br />
+Observation 2: If no satisfying assignment exists then every assignment fails to satisfy a certain factor of the clauses (let’s call it $p$). Then the probability of failure will be at least $\frac{p}{3}$. <br /><br />
 Now there are several things that are interesting about this 2 prover round 1 game reduction. One is that we turned 3SAT which is a decision problem into a gap decision problem. The second thing which is related is that we can now start to talk about this game in terms of completeness and soundness. In a way this is starting to sound like the PCP Theorem. <br /><br />
-Another thing we could try is to play some kind of repeated game. One way we could do this is asking a series of questions, one after another. However it turns out to be more interesting to ask a bunch of questions at the same time (in parallel). We define a parallel n-repeated game $G^n$ for some 2P1R game G to be similar to G but each player reads a tuple of n questions and then outputs a tuple of n answers. The verifier accepts if and only if all the individual answers would be accepted by the verifier for G. So what can we say about these repeated games?<br /><br />
-**Theorem (Parallel Repetition Theorem):**  For all games $G$ if $\omega(G) = 1 - \delta$ then, <br />
+Another thing we could try is to play some kind of repeated game. One way we could do this is asking a series of questions, one after another. However it turns out to be more interesting to ask a bunch of questions at the same time (in parallel). We define a parallel n-repeated game $G^n$ for some 2P1R game G to be similar to G but each player reads a tuple of n questions and then outputs a tuple of n answers. The verifier accepts if and only if all the individual answers would be accepted by the verifier for G. So what can we say about these repeated games?<br /><br /> 
+<strong>Theorem (Parallel Repetition Theorem):</strong> For all games $G$ if $\omega(G) = 1 - \delta$ then, <br /></p>
 <div style="text-align:center;">$$ \omega(G^n) \leq 2^{-\Omega(\delta^3 n)} $$</div>
 
-While we will not go talk about this theorem much it is interesting because it can be used to decrease the size of gaps. In our 3-SAT game it is NP-Hard to distinguish between cases where we succeed with probability 1 and probability $1-\frac{p}{3}$. But what if we could make our gap smaller? This could potentially make it easier to show different approximations are hard. <br /><br /><br />
+<p>While we will not go talk about this theorem much it is interesting because it can be used to decrease the size of gaps. In our 3-SAT game it is NP-Hard to distinguish between cases where we succeed with probability 1 and probability $1-\frac{p}{3}$. But what if we could make our gap smaller? This could potentially make it easier to show different approximations are hard. <br /><br /><br /></p>
 
-**Summary**<br />
-In this post I have summarized my findings after researching the a few basic concepts surrounding the PCP Theorem. Throughout this post there are a few big ideas. First we looked at the PCP Theorem itself and the ideas of completeness and soundness. We played with a few toy cases to get a feel for what the statement was saying. Next we used the PCP Theorem to shows MAX-3SAT had no PTAS. In this proof we turned our random PCP verifier in to a deterministic instance of MAX-3SAT. Then we showed that using MAX-3SAT we could search for a proof that our statement was correct or not. We then used graphs and the self improvement property of the graph product to prove that Max Clique had no constant approximation. After that we looked at Hastad's 3 bit PCP and used it to get a few more specific bounds on MAX-3SAT and Vertex Cover. The most important part of these proofs were the gap preserving reduction from our GAP-MAX-E3LIN decision problem. Finally we looked at a totally different way of viewing everything as a game. These general proof strategies give us some tools to tackle inapproximability arguments. <br /><br />
+<p><strong>Summary</strong><br />
+In this post I have summarized my findings after researching the a few basic concepts surrounding the PCP Theorem. Throughout this post there are a few big ideas. First we looked at the PCP Theorem itself and the ideas of completeness and soundness. We played with a few toy cases to get a feel for what the statement was saying. Next we used the PCP Theorem to shows MAX-3SAT had no PTAS. In this proof we turned our random PCP verifier in to a deterministic instance of MAX-3SAT. Then we showed that using MAX-3SAT we could search for a proof that our statement was correct or not. We then used graphs and the self improvement property of the graph product to prove that Max Clique had no constant approximation. After that we looked at Hastad’s 3 bit PCP and used it to get a few more specific bounds on MAX-3SAT and Vertex Cover. The most important part of these proofs were the gap preserving reduction from our GAP-MAX-E3LIN decision problem. Finally we looked at a totally different way of viewing everything as a game. These general proof strategies give us some tools to tackle inapproximability arguments. <br /><br /></p>
 
-**Exercises to the Reader** <br /><br />
+<p><strong>Exercises to the Reader</strong> <br /><br /></p>
 
 <p style="display:inline;">1) Show $PCP(log(n), 1) = P?
 <details style="display:inline;">
@@ -426,24 +425,27 @@ In this post I have summarized my findings after researching the a few basic con
 	<summary>Answer</summary>
 	<br /> As a proof of this consider our reduction in the proof for MAX-3SAT having no PTAS. We constructed a MAX-3SAT instance which checked if there was a (the bits of the proof were the variables) proof which could satisfy every one of the O(n) possible combinations of our O(log(n)) bits of randomness. The key was that we only had to have a constant number of variables because we only read a constant number of bits of the proof. Furthermore the size of our clauses was based on the number of bits we read. If we do this same construction here we will end up with an instance of MAX-1SAT which is solvable in polynomial time.
 	<br /><br />
-</details><br />
+</details>
+<p><br /></p>
 
-2) We talked about MAX-E3LIN but never proved any hardness results for it. Use Hastad's PCP Theorem prove the following: <br />
-**Theorem:** MAX-3LIN cannot be approximated by a factor of $\frac{1}{2}+\epsilon$ for any $\epsilon &gt; 0$. <br />
+<p>2) We talked about MAX-E3LIN but never proved any hardness results for it. Use Hastad’s PCP Theorem prove the following: <br /> 
+<strong>Theorem:</strong> MAX-3LIN cannot be approximated by a factor of $\frac{1}{2}+\epsilon$ for any $\epsilon &gt; 0$. <br /></p>
 <details style="display:inline;">
 	<summary>Answer</summary>
 	<br /> Reduce the optimization version of MAX-E3LIN to the decision version using a gap preserving reduction.
 	<br /><br />
-</details><br />
+</details>
+<p><br /></p>
 
-3) When the repeated version 2 Prover 1 Round Game was originally conceived it was conjectured that<br />
+<p>3) When the repeated version 2 Prover 1 Round Game was originally conceived it was conjectured that<br /></p>
 <div style="text-align:center;">$$\omega(G^k) = \omega(G)^k$$</div>
-Give a 2P1R Game which shows that this is false (i.e. $\omega(G^k) &gt; \omega(G)^k$)
+<p>Give a 2P1R Game which shows that this is false (i.e. $\omega(G^k) &gt; \omega(G)^k$)</p>
 <details style="display:inline;">
 	<summary>Answer</summary>
 	We define the Feige Game defined as follows:<br /> Each player gets a bit as input. They must output a bit and a player. The players win if their bits are the same and that player did get that bit. Because they can't communicate $\omega(G) = \frac{1}{2}$. The best strategy is to agree upon a player in advance. That player will pick themselves and their bit and the other player will guess their bit. However if the players play the two round version they can double down on their original bets which would mean $\omega(G^2) = \frac{1}{2}$ as well.
 	<br /><br />
-</details><br /><br /><br /><br /><br />
+</details>
+<p><br /><br /><br /><br /><br />
 Sources (and great references for learning more): <br />
 http://www.cs.jhu.edu/~scheideler/courses/600.471_S05/lecture_9.pdf<br />
 http://people.seas.harvard.edu/~madhusudan/courses/Spring2016/scribe/lect18.pdf<br />
@@ -451,13 +453,8 @@ http://pages.cs.wisc.edu/~shuchi/courses/880-S07/scribe-notes/lecture29.pdf<br /
 http://www.cs.princeton.edu/~zdvir/apx11slides/guruswami-slides.pdf<br />
 https://cstheory.stackexchange.com/questions/18360/multi-prover-verifier-games-and-pcp-theorem<br />
 http://theory.cs.princeton.edu/complexity/ab_hastadchap.pdf
-<br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /></p>
 
-
-
-
-
-</p>
 
   </div>
 
