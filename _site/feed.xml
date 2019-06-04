@@ -4,10 +4,10 @@
     <title>Peter Stefek</title>
     <description>I'm a rising third year student at Oberlin College. I am currently majoring in Math and Computer Science. 
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 15 Sep 2018 11:22:35 -0700</pubDate>
-    <lastBuildDate>Sat, 15 Sep 2018 11:22:35 -0700</lastBuildDate>
+    <link>http://yourdomain.com/</link>
+    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 03 Jun 2019 22:36:39 -0700</pubDate>
+    <lastBuildDate>Mon, 03 Jun 2019 22:36:39 -0700</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
@@ -186,8 +186,8 @@ So this is cool little fact but what kinds of problems can we apply it too besid
 
 </description>
         <pubDate>Sun, 06 May 2018 03:50:40 -0700</pubDate>
-        <link>http://localhost:4000/probability/choice/decision/2018/05/06/stopping.html</link>
-        <guid isPermaLink="true">http://localhost:4000/probability/choice/decision/2018/05/06/stopping.html</guid>
+        <link>http://yourdomain.com/probability/choice/decision/2018/05/06/stopping.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/probability/choice/decision/2018/05/06/stopping.html</guid>
         
         
         <category>probability</category>
@@ -488,8 +488,8 @@ http://theory.cs.princeton.edu/complexity/ab_hastadchap.pdf
 
 </description>
         <pubDate>Sun, 29 Apr 2018 03:50:40 -0700</pubDate>
-        <link>http://localhost:4000/theory/complexity/algorithms/2018/04/29/pcp.html</link>
-        <guid isPermaLink="true">http://localhost:4000/theory/complexity/algorithms/2018/04/29/pcp.html</guid>
+        <link>http://yourdomain.com/theory/complexity/algorithms/2018/04/29/pcp.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/theory/complexity/algorithms/2018/04/29/pcp.html</guid>
         
         
         <category>theory</category>
@@ -637,8 +637,8 @@ Here’s a visualization of the algorithm:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;One final note on runtime.&lt;/strong&gt; If you run our example code you’ll notice the “slow” function is almost twice as fast as the “fast” one. Have I been lying this whole time? No. This is because in our example we used a small number of weights. In a &lt;a href=&quot;https://gist.github.com/Mr4k/eabaca318499bd54e5e18431efbc6622&quot;&gt;separate speed test&lt;/a&gt; I use 1000 weights and draw from the distributions 100000 times each. In this case the fast algorithm runs in 0.35 seconds on my computer while the slow algorithm takes about 15 seconds.&lt;/p&gt;
 </description>
         <pubDate>Sun, 25 Jun 2017 04:00:40 -0700</pubDate>
-        <link>http://localhost:4000/brain/teaser/algorithm/probability/alias/2017/06/25/alias.html</link>
-        <guid isPermaLink="true">http://localhost:4000/brain/teaser/algorithm/probability/alias/2017/06/25/alias.html</guid>
+        <link>http://yourdomain.com/brain/teaser/algorithm/probability/alias/2017/06/25/alias.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/brain/teaser/algorithm/probability/alias/2017/06/25/alias.html</guid>
         
         
         <category>brain</category>
@@ -683,8 +683,8 @@ Finally after we have chosen our next move we need to click the position. For th
 
 </description>
         <pubDate>Sun, 29 Jan 2017 02:50:40 -0800</pubDate>
-        <link>http://localhost:4000/mindsweeper/video/game/algorithm/python/2017/01/29/minesweeper-copy.html</link>
-        <guid isPermaLink="true">http://localhost:4000/mindsweeper/video/game/algorithm/python/2017/01/29/minesweeper-copy.html</guid>
+        <link>http://yourdomain.com/mindsweeper/video/game/algorithm/python/2017/01/29/minesweeper-copy.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/mindsweeper/video/game/algorithm/python/2017/01/29/minesweeper-copy.html</guid>
         
         
         <category>mindsweeper</category>
@@ -736,8 +736,8 @@ Finally after we have chosen our next move we need to click the position. For th
 
 </description>
         <pubDate>Fri, 09 Sep 2016 03:50:40 -0700</pubDate>
-        <link>http://localhost:4000/brain/teaser/puzzle/construction/2016/09/09/brain-pain.html</link>
-        <guid isPermaLink="true">http://localhost:4000/brain/teaser/puzzle/construction/2016/09/09/brain-pain.html</guid>
+        <link>http://yourdomain.com/brain/teaser/puzzle/construction/2016/09/09/brain-pain.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/brain/teaser/puzzle/construction/2016/09/09/brain-pain.html</guid>
         
         
         <category>brain</category>
@@ -831,8 +831,8 @@ Finally after we have chosen our next move we need to click the position. For th
 &lt;p&gt;Is E just a meaningless intermediate stepin our problem. Not exactly. Lets consider what E is. E maps points from the screen space of camera 1 to the screen space of camera 2. Basically if you have E project any point in camera 1 in camera 2 which could have all sorts of cool applications. For example overlaying two images on top of one another. Or drawing on one image and overlaying your drawing onto an entire video (obviously if the angle varies too much there could be depth issues).&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Aug 2016 05:01:00 -0700</pubDate>
-        <link>http://localhost:4000/structure/from/motion/depth/linear/algebra/2016/08/20/sfm.html</link>
-        <guid isPermaLink="true">http://localhost:4000/structure/from/motion/depth/linear/algebra/2016/08/20/sfm.html</guid>
+        <link>http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/20/sfm.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/20/sfm.html</guid>
         
         
         <category>structure</category>
@@ -896,8 +896,8 @@ Finally after we have chosen our next move we need to click the position. For th
 &lt;p&gt;So you might be thinking that if we had enough points we could set up a system of equations and solve for the unknown variables above. The problem with this approach is that the above equation is not linear because λ&lt;sub&gt;2&lt;/sub&gt;Rp&lt;sub&gt;2&lt;/sub&gt; contains the product of two unknowns (R and λ&lt;sub&gt;2&lt;/sub&gt;). This makes it very difficult to solve. However in the next article we will use some clever math turn this into a system we can solve.&lt;/p&gt;
 </description>
         <pubDate>Thu, 11 Aug 2016 04:00:50 -0700</pubDate>
-        <link>http://localhost:4000/structure/from/motion/depth/linear/algebra/2016/08/11/sfm2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/structure/from/motion/depth/linear/algebra/2016/08/11/sfm2.html</guid>
+        <link>http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/11/sfm2.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/structure/from/motion/depth/linear/algebra/2016/08/11/sfm2.html</guid>
         
         
         <category>structure</category>
@@ -954,8 +954,8 @@ I will try to improve this system in a couple ways. First of all I will train it
 
 </description>
         <pubDate>Sat, 23 Jul 2016 03:50:40 -0700</pubDate>
-        <link>http://localhost:4000/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</link>
-        <guid isPermaLink="true">http://localhost:4000/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</guid>
+        <link>http://yourdomain.com/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/neural/network/deep/learning/chess/training/2016/07/23/deep-chess.html</guid>
         
         
         <category>neural</category>
@@ -1063,8 +1063,8 @@ Below is the full source code. Feel free to run it yourself. You’ll need the s
 This solution is only 80% accurate on the test set. That is a significant improvement on the 50% chance of guessing randomly but there is still a long way to go. Possible improvements could include, taking word order into account, uzing something like &lt;a href=&quot;https://en.wikipedia.org/wiki/Word2vec&quot;&gt;word2vec&lt;/a&gt; to understand the meanings of words better, using a more complex classifier than a svm.&lt;/p&gt;
 </description>
         <pubDate>Thu, 14 Jul 2016 02:40:40 -0700</pubDate>
-        <link>http://localhost:4000/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</link>
-        <guid isPermaLink="true">http://localhost:4000/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</guid>
+        <link>http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/sentiment/analysis/logistic/regression/n-gram/2016/07/14/sentiment.html</guid>
         
         
         <category>sentiment</category>
@@ -1133,8 +1133,8 @@ This solution is only 80% accurate on the test set. That is a significant improv
 
 </description>
         <pubDate>Tue, 28 Jun 2016 13:30:40 -0700</pubDate>
-        <link>http://localhost:4000/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</link>
-        <guid isPermaLink="true">http://localhost:4000/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</guid>
+        <link>http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/chess/project/minimax/algorithm/search/monte/carlo/2016/06/28/search.html</guid>
         
         
         <category>chess</category>
